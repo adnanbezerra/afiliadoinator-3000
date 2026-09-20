@@ -1,6 +1,6 @@
 # Coletor de Ofertas — APIs dos Marketplaces
 
-Objetivo: construir um backend capaz de coletar produtos e ofertas automaticamente para um canal de afiliados, evitando scraping sempre que houver API oficial.
+Objetivo: construir um backend capaz de coletar produtos e ofertas automaticamente para um canal de afiliados, priorizando APIs oficiais e mantendo rastreabilidade entre cada implementação e sua documentação de origem.
 
 Marketplaces iniciais:
 
@@ -10,230 +10,163 @@ Marketplaces iniciais:
 
 ---
 
-# 1. Amazon Brasil
+# 0. Fontes oficiais e rastreabilidade
 
-## API
+Este documento é uma especificação inicial para implementação.
 
-Usar a **Amazon Creators API**, sucessora da Product Advertising API (PA-API 5.0).
+Antes de implementar ou modificar uma integração, consultar a documentação oficial correspondente. APIs, parâmetros, autenticação, limites e políticas podem mudar.
 
-A PA-API antiga não deve ser usada em uma implementação nova.
+Cada referência possui um identificador (`AMZ-*`, `ALI-*`, `MELI-*`) que deve ser citado nas partes relevantes do código/documentação interna quando útil.
 
-Base da API:
+## Amazon — Creators API
+
+### [AMZ-01] Creators API — API Reference
+
+Referência geral das operações e recursos disponíveis.
+
+https://associados.amazon.com.br/creatorsapi/docs/en-us/api-reference
+
+Documenta oficialmente as operações:
+
+* `SearchItems`
+* `GetItems`
+* `GetVariations`
+* `GetBrowseNodes`
+
+### [AMZ-02] SearchItems
+
+https://associados.amazon.com.br/creatorsapi/docs/en-us/api-reference/operations/search-items
+
+Fonte para:
+
+* pesquisa por keywords;
+* SearchIndex;
+* filtros;
+* paginação;
+* ordenação;
+* recursos retornados;
+* `partnerTag`;
+* `OffersV2`;
+* URLs dos produtos.
+
+### [AMZ-03] GetItems
+
+https://associados.amazon.com.br/creatorsapi/docs/en-us/api-reference/operations/get-items
+
+Fonte para consulta de produtos conhecidos através de identificadores/ASINs.
+
+### [AMZ-04] GetVariations
+
+https://associados.amazon.com.br/creatorsapi/docs/en-us/api-reference/operations/get-variations
+
+Fonte para obtenção de variações de produtos, como tamanho e cor.
+
+### [AMZ-05] GetBrowseNodes
+
+https://associados.amazon.com.br/creatorsapi/docs/en-us/api-reference/operations/get-browse-nodes
+
+Fonte para navegação na hierarquia de categorias da Amazon.
+
+### [AMZ-06] Usando Creators API via HTTP/cURL
+
+https://associados.amazon.com.br/creatorsapi/docs/en-us/get-started/using-curl
+
+Fonte para:
+
+* Base URL;
+* OAuth/access token;
+* headers;
+* `Authorization: Bearer`;
+* `x-marketplace`;
+* formato das requisições HTTP.
+
+A documentação informa atualmente:
 
 ```text
-https://creatorsapi.amazon/catalog/v1/
+Base URL:
+https://creatorsapi.amazon
+
+API:
+https://creatorsapi.amazon/catalog/v1/...
 ```
 
-Marketplace brasileiro:
+### [AMZ-07] Marketplace Brasil
+
+https://associados.amazon.com.br/creatorsapi/docs/en-us/locale-reference/brazil
+
+Fonte para configuração brasileira:
 
 ```text
-www.amazon.com.br
+marketplace = www.amazon.com.br
+language = pt_BR
+currency = BRL
 ```
 
-A autenticação da Creators API utiliza OAuth 2.0.
+Também contém os Search Indexes disponíveis especificamente no Brasil.
 
-Credenciais necessárias:
+### [AMZ-08] Cadastro na Creators API
 
-```env
-AMAZON_CREDENTIAL_ID=
-AMAZON_CREDENTIAL_SECRET=
-AMAZON_CREDENTIAL_VERSION=
-AMAZON_PARTNER_TAG=
-```
+https://associados.amazon.com.br/creatorsapi/docs/en-us/onboarding/register-for-creators-api
 
-O access token tem validade limitada e deve ser armazenado em cache e renovado automaticamente.
+Fonte para requisitos de acesso e criação das credenciais.
+
+### [AMZ-09] Migração PA-API → Creators API
+
+https://associados.amazon.com.br/creatorsapi/docs/en-us/migrating-to-creatorsapi-from-paapi
+
+Fonte importante para evitar implementar exemplos antigos da Product Advertising API.
+
+Também contém exemplos do fluxo OAuth 2.0 e chamadas da Creators API.
+
+### [AMZ-10] Licença / regras de utilização
+
+https://associados.amazon.com.br/creatorsapi/docs/en-us/license-agreement
+
+Consultar antes de definir armazenamento permanente, cache e utilização de conteúdo retornado pela Amazon.
 
 ---
 
-## Operações principais
+# AliExpress — Affiliate API
 
-### SearchItems
+## [ALI-01] Affiliate Product Query
 
-Principal operação para descoberta automática de ofertas.
+https://open.alitrip.com/docs/api.htm?apiId=45803
 
-```text
-POST /catalog/v1/searchItems
-```
+Esta é a principal documentação oficial utilizada para a integração inicial.
 
-Uso:
+Documenta:
 
 ```text
-buscar produtos por palavra-chave
-filtrar categorias
-obter ASIN
-obter título
-obter imagens
-obter preços/ofertas
-obter URL afiliada
+aliexpress.affiliate.product.query
 ```
 
-Exemplo conceitual:
-
-```json
-{
-  "keywords": "mocassim masculino",
-  "partnerTag": "PARTNER_TAG",
-  "marketplace": "www.amazon.com.br",
-  "resources": [
-    "images.primary.large",
-    "itemInfo.title",
-    "offersV2"
-  ]
-}
-```
-
-Header:
-
-```http
-Authorization: Bearer ACCESS_TOKEN
-Content-Type: application/json
-x-marketplace: www.amazon.com.br
-```
-
-IMPORTANTE:
-
-`partnerTag` é obrigatório atualmente para `SearchItems`.
-
----
-
-### GetItems
-
-Consulta produtos conhecidos através de ASIN.
+A mesma área da documentação oficial lista atualmente outras APIs de Promotion Creatives:
 
 ```text
-POST /catalog/v1/getItems
+aliexpress.affiliate.hotproduct.query
+aliexpress.affiliate.category.get
+aliexpress.affiliate.product.query
+aliexpress.affiliate.product.smartmatch
+aliexpress.affiliate.productdetail.get
+aliexpress.affiliate.featuredpromo.get
+aliexpress.affiliate.featuredpromo.products.get
+aliexpress.affiliate.hotproduct.download
+aliexpress.affiliate.image.search
 ```
 
-Útil depois que o produto já estiver armazenado no banco.
-
-Exemplo:
-
-```json
-{
-  "itemIds": [
-    "ASIN"
-  ],
-  "partnerTag": "PARTNER_TAG",
-  "marketplace": "www.amazon.com.br",
-  "resources": [
-    "images.primary.large",
-    "itemInfo.title",
-    "offersV2"
-  ]
-}
-```
-
-Usar para atualizar periodicamente:
+A documentação também define o gateway:
 
 ```text
-preço
-oferta
-disponibilidade
-imagem
-informações do produto
-```
-
----
-
-### GetVariations
-
-```text
-POST /catalog/v1/getVariations
-```
-
-Obtém variações de um ASIN.
-
-Útil para:
-
-```text
-tamanho
-cor
-modelo
-variações do mesmo produto
-```
-
----
-
-### GetBrowseNodes
-
-```text
-POST /catalog/v1/getBrowseNodes
-```
-
-Permite navegar pela hierarquia de categorias da Amazon.
-
-Pode ser usado para construir buscas por nicho:
-
-```text
-Moda masculina
-    ├── Calçados
-    ├── Relógios
-    ├── Camisas
-    └── Acessórios
-```
-
----
-
-## Recursos importantes
-
-Solicitar apenas os recursos necessários.
-
-Exemplos:
-
-```text
-itemInfo.title
-
-images.primary.small
-images.primary.medium
-images.primary.large
-
-images.variants.small
-images.variants.medium
-images.variants.large
-
-offersV2
-
-browseNodeInfo.browseNodes
-browseNodeInfo.browseNodes.salesRank
-
-parentASIN
-```
-
-`offersV2` é especialmente importante para obter informações comerciais atuais.
-
-A URL retornada pela API pode conter o Partner Tag, por exemplo:
-
-```text
-https://www.amazon.com.br/dp/ASIN?tag=PARTNER_TAG...
-```
-
-Portanto, o coletor deve preservar a URL retornada pela API.
-
----
-
-# 2. AliExpress
-
-## API
-
-Usar a API oficial de afiliados do AliExpress.
-
-Gateway documentado:
-
-```text
+HTTPS:
 https://eco.taobao.com/router/rest
+
+HTTP:
+http://gw.api.taobao.com/router/rest
 ```
 
-A API segue o modelo TOP/AliExpress Open Platform.
+Utilizar HTTPS.
 
-Credenciais:
-
-```env
-ALIEXPRESS_APP_KEY=
-ALIEXPRESS_APP_SECRET=
-ALIEXPRESS_TRACKING_ID=
-```
-
-As requisições utilizam parâmetros como:
+Ela documenta parâmetros comuns como:
 
 ```text
 method
@@ -245,33 +178,14 @@ format
 v
 ```
 
-Versão documentada:
+e parâmetros específicos de `product.query`, incluindo:
 
 ```text
-v=2.0
-```
-
----
-
-## aliexpress.affiliate.product.query
-
-Principal endpoint do coletor AliExpress.
-
-Method:
-
-```text
-aliexpress.affiliate.product.query
-```
-
-Permite pesquisar produtos elegíveis para afiliados.
-
-Parâmetros relevantes:
-
-```text
-keywords
 category_ids
-min_sale_price
+fields
+keywords
 max_sale_price
+min_sale_price
 page_no
 page_size
 sort
@@ -280,668 +194,337 @@ target_language
 tracking_id
 ship_to_country
 delivery_days
-fields
 ```
 
-Configuração padrão para nosso caso:
+Também contém exemplos oficiais para:
+
+* cURL;
+* Node.js;
+* Python;
+* PHP;
+* Java;
+* .NET;
+* C/C++.
+
+### Regra para implementação AliExpress
+
+O Codex deve usar `[ALI-01]` como fonte primária para descobrir os links das documentações específicas dos outros métodos.
+
+Não assumir que todos os endpoints listados possuem exatamente os mesmos parâmetros de `product.query`.
+
+Antes de implementar:
 
 ```text
-target_currency=BRL
-target_language=PT
-ship_to_country=BR
-```
-
-Exemplo:
-
-```text
-method=aliexpress.affiliate.product.query
-keywords=mocassim masculino
-target_currency=BRL
-target_language=PT
-ship_to_country=BR
-page_size=50
-tracking_id=TRACKING_ID
-```
-
-Ordenações documentadas:
-
-```text
-SALE_PRICE_ASC
-SALE_PRICE_DESC
-LAST_VOLUME_ASC
-LAST_VOLUME_DESC
-```
-
----
-
-## Dados retornados
-
-A API consegue retornar informações extremamente úteis para ranking de ofertas:
-
-```text
-product_id
-product_title
-
-product_detail_url
-promotion_link
-
-product_main_image_url
-product_small_image_urls
-product_video_url
-
-sale_price
-original_price
-discount
-
-target_sale_price
-target_original_price
-
-commission_rate
-hot_product_commission_rate
-relevant_market_commission_rate
-
-evaluate_rate
-lastest_volume
-
-first_level_category_id
-first_level_category_name
-
-second_level_category_id
-second_level_category_name
-
-shop_id
-shop_url
-
-promo_code_info
-ship_to_days
-```
-
-Um campo especialmente importante é:
-
-```text
-promotion_link
-```
-
-A documentação mostra esse campo retornando URLs no formato:
-
-```text
-https://s.click.aliexpress.com/e/...
-```
-
-Portanto, preferir o `promotion_link` retornado diretamente pela API em vez de construir links manualmente.
-
----
-
-## aliexpress.affiliate.hotproduct.query
-
-Method:
-
-```text
-aliexpress.affiliate.hotproduct.query
-```
-
-Usar como fonte adicional de descoberta.
-
-Objetivo:
-
-```text
-encontrar produtos considerados "hot products"
-pelo próprio sistema de afiliados
-```
-
-É particularmente interessante para alimentar automaticamente a fila de candidatos.
-
----
-
-## aliexpress.affiliate.productdetail.get
-
-Method:
-
-```text
-aliexpress.affiliate.productdetail.get
-```
-
-Usar para atualizar produtos conhecidos.
-
-Fluxo:
-
-```text
-product_id
-   ↓
+hotproduct.query
 productdetail.get
-   ↓
-dados atuais
-```
-
----
-
-## Outros endpoints disponíveis
-
-A documentação oficial atualmente também lista:
-
-```text
-aliexpress.affiliate.category.get
-
-aliexpress.affiliate.product.smartmatch
-
-aliexpress.affiliate.featuredpromo.get
-
-aliexpress.affiliate.featuredpromo.products.get
-
-aliexpress.affiliate.hotproduct.download
-
-aliexpress.affiliate.image.search
-```
-
-### product.smartmatch
-
-Recomenda produtos automaticamente.
-
-Pode futuramente complementar nosso sistema de descoberta.
-
-### featuredpromo.get
-
-Obtém campanhas promocionais.
-
-### featuredpromo.products.get
-
-Obtém produtos pertencentes às campanhas.
-
-Pode ser uma fonte excelente para detectar:
-
-```text
-campanhas
-promoções especiais
-eventos
-ofertas temporárias
-```
-
-### hotproduct.download
-
-Permite trabalhar com dados de produtos em alta em maior escala.
-
-Investigar sua disponibilidade para nossa aplicação depois da obtenção das credenciais.
-
----
-
-# 3. Mercado Livre Brasil
-
-## API
-
-API oficial:
-
-```text
-https://api.mercadolibre.com
-```
-
-Site ID brasileiro:
-
-```text
-MLB
-```
-
-Credenciais:
-
-```env
-MELI_CLIENT_ID=
-MELI_CLIENT_SECRET=
-MELI_ACCESS_TOKEN=
-```
-
----
-
-# ATENÇÃO SOBRE AFILIADOS
-
-Até o momento não foi encontrada na documentação pública uma API equivalente à Creators API/AliExpress Affiliate API que gere automaticamente links de afiliados do Mercado Livre.
-
-Portanto, separar conceitualmente:
-
-```text
-Mercado Livre Developers API
-        ↓
-descoberta e consulta de produtos
-
-Programa de Afiliados Mercado Livre
-        ↓
-atribuição / geração de links
-```
-
-Não implementar engenharia reversa do gerador de links de afiliado.
-
-Criar a abstração:
-
-```ts
-interface AffiliateLinkGenerator {
-  generate(productUrl: string): Promise<string | null>;
-}
-```
-
-Para Mercado Livre, inicialmente:
-
-```text
-generate() -> null
-```
-
-ou utilizar posteriormente um método oficialmente disponibilizado pelo programa.
-
----
-
-# Busca de produtos no Mercado Livre
-
-Existe uma diferença importante entre catálogo e anúncios.
-
-Para busca de produtos de catálogo:
-
-```text
-GET /products/search
-```
-
-Exemplo:
-
-```http
-GET https://api.mercadolibre.com/products/search?status=active&site_id=MLB&q=mocassim
-Authorization: Bearer ACCESS_TOKEN
-```
-
-Também aceita:
-
-```text
-domain_id
-product identifier
-part number
-product id
-```
-
----
-
-# Consulta de itens
-
-Para obter informações de anúncios conhecidos, utilizar os recursos de itens.
-
-IMPORTANTE:
-
-O Mercado Livre está descontinuando:
-
-```text
-/items?ids=
-```
-
-Para uma integração nova, usar:
-
-```text
-/items/bulk?ids=
-```
-
-Exemplo conceitual:
-
-```http
-GET https://api.mercadolibre.com/items/bulk?ids=MLB123,MLB456
-Authorization: Bearer ACCESS_TOKEN
-```
-
-Também é possível selecionar campos:
-
-```text
-attributes=body.id,body.price,body.title
-```
-
----
-
-# Best sellers do Mercado Livre
-
-Endpoint extremamente interessante para nosso coletor:
-
-```text
-GET /highlights/{SITE_ID}/category/{CATEGORY_ID}
-```
-
-Brasil:
-
-```text
-GET /highlights/MLB/category/{CATEGORY_ID}
-```
-
-Retorna os 20 principais produtos/itens da categoria.
-
-Isso pode ser usado como fonte automática de candidatos:
-
-```text
-categoria
-   ↓
-/highlights
-   ↓
-20 best sellers
-   ↓
-consultar detalhes
-   ↓
-armazenar
-   ↓
-ranking interno
-```
-
----
-
-# 4. Modelo normalizado
-
-Todas as APIs devem ser convertidas para um formato interno único.
-
-```ts
-interface Product {
-  provider: "amazon" | "aliexpress" | "mercadolivre";
-
-  externalId: string;
-
-  title: string;
-
-  currentPrice: number;
-  originalPrice?: number;
-
-  currency: "BRL";
-
-  discountPercentage?: number;
-
-  imageUrl?: string;
-
-  productUrl: string;
-  affiliateUrl?: string;
-
-  categoryId?: string;
-  categoryName?: string;
-
-  rating?: number;
-  salesVolume?: number;
-  salesRank?: number;
-
-  commissionRate?: number;
-
-  lastSeenAt: Date;
-}
-```
-
----
-
-# 5. Providers
-
-Criar:
-
-```ts
-interface MarketplaceProvider {
-  searchProducts(query: string): Promise<Product[]>;
-
-  getProduct(id: string): Promise<Product | null>;
-
-  getTrendingProducts?(): Promise<Product[]>;
-
-  getCategoryProducts?(categoryId: string): Promise<Product[]>;
-}
-```
-
-Implementações:
-
-```text
-AmazonProvider
-AliExpressProvider
-MercadoLivreProvider
-```
-
----
-
-# 6. Histórico de preço
-
-Não confiar exclusivamente no "preço anterior" informado pelo marketplace.
-
-Criar:
-
-```text
-products
-product_price_history
-```
-
-Exemplo:
-
-```text
-product_price_history
-
-id
-product_id
-price
-original_price
-collected_at
-```
-
-Assim podemos calcular:
-
-```text
-preço atual
-menor preço 7 dias
-menor preço 30 dias
-menor preço 90 dias
-preço médio
-queda percentual real
-```
-
----
-
-# 7. Descoberta de ofertas
-
-Executar queries predefinidas periodicamente.
-
-Exemplos:
-
-```text
-mocassim masculino
-loafer masculino
-camisa social masculina
-camisa linho masculina
-relógio masculino
-carteira couro
-cinto couro
-blazer masculino
-sapato social masculino
-perfume masculino
-óculos masculino
-polo masculina
-```
-
-Amazon:
-
-```text
-SearchItems
-```
-
-AliExpress:
-
-```text
-affiliate.product.query
-affiliate.hotproduct.query
+product.smartmatch
+featuredpromo.get
 featuredpromo.products.get
+hotproduct.download
+image.search
 ```
 
-Mercado Livre:
+abrir a documentação específica daquele método e validar:
 
-```text
-products/search
-highlights
-```
+* parâmetros;
+* autenticação;
+* resposta;
+* disponibilidade;
+* status/depreciação.
 
 ---
 
-# 8. Ranking interno
+# Mercado Livre — Developers API
 
-Exemplo inicial:
+## [MELI-01] Criar uma aplicação
 
-```text
-score =
-    desconto_real        * 0.30
-  + popularidade         * 0.20
-  + avaliação            * 0.10
-  + comissão             * 0.15
-  + aderência_ao_nicho   * 0.25
-```
+https://developers.mercadolivre.com.br/crie-uma-aplicacao-no-mercado-livre
 
-O algoritmo deve ser independente do marketplace.
+Fonte para:
 
-Campos inexistentes em determinado provider simplesmente não entram no cálculo ou devem receber peso redistribuído.
+* criação da aplicação;
+* Client ID;
+* Client Secret;
+* Redirect URI;
+* scopes;
+* configuração;
+* acesso à API.
 
----
-
-# 9. Fluxo geral
-
-```text
-Amazon Creators API ──────────┐
-                              │
-AliExpress Affiliate API ─────┼──► Normalizer
-                              │
-Mercado Livre API ────────────┘
-                                    │
-                                    ▼
-                               PostgreSQL
-                                    │
-                          histórico de preços
-                                    │
-                                    ▼
-                              Offer Scorer
-                                    │
-                                    ▼
-                            Candidate Offers
-                                    │
-                                    ▼
-                             aprovação humana
-                                    │
-                                    ▼
-                           Telegram / WhatsApp
-```
-
----
-
-# 10. Cadastro e credenciais necessárias
-
-## AMAZON
-
-Já existe conta no programa de Associados.
-
-Ainda verificar/realizar:
-
-```text
-Associados Amazon
-→ Ferramentas
-→ Creators API
-→ Create Application
-→ Add New Credential
-```
-
-A Amazon exige que a conta tenha recebido aceitação final no programa. O cadastro da Creators API é disponibilizado a associados aceitos que tenham indicado vendas qualificadas.
-
-Guardar:
-
-```text
-Credential ID
-Credential Secret
-Credential Version
-Partner Tag
-```
-
-Portal:
-
-https://associados.amazon.com.br/
-
-Documentação:
-
-https://associados.amazon.com.br/creatorsapi/docs/en-us/onboarding/register-for-creators-api
-
----
-
-## ALIEXPRESS
-
-É necessário ter/acessar o ecossistema de afiliados do AliExpress e criar/configurar acesso de desenvolvedor para obter as credenciais da Open Platform.
-
-Precisamos obter:
-
-```text
-App Key
-App Secret
-Tracking ID
-```
-
-Documentação da API:
-
-https://open.alitrip.com/docs/api.htm?apiId=45803
-
-A primeira validação após obter as credenciais deve ser uma chamada simples:
-
-```text
-aliexpress.affiliate.product.query
-```
-
-com:
-
-```text
-keywords=watch
-ship_to_country=BR
-target_currency=BRL
-target_language=PT
-page_size=10
-```
-
-Se funcionar, habilitar o `AliExpressProvider`.
-
----
-
-## MERCADO LIVRE
-
-Já existe participação no programa de afiliados.
-
-Para utilizar a Developers API, criar também uma aplicação no portal de desenvolvedores do Mercado Livre.
-
-Portal:
-
-https://developers.mercadolivre.com.br/
-
-Criar aplicação e obter:
+A documentação informa que, após criar a aplicação, são fornecidos:
 
 ```text
 Client ID
 Client Secret
 ```
 
-Implementar OAuth do Mercado Livre para obtenção/renovação de:
+e orienta seguir posteriormente o fluxo oficial de autenticação/autorização.
+
+## [MELI-02] Itens e buscas
+
+https://developers.mercadolivre.com.br/itens-e-buscas
+
+Fonte oficial para consulta de itens e operações relacionadas.
+
+IMPORTANTE:
+
+A documentação atual informa a descontinuação de:
 
 ```text
+/items?ids=
+```
+
+e sua substituição por:
+
+```text
+/items/bulk?ids=
+```
+
+Para implementações novas utilizar:
+
+```text
+/items/bulk?ids=ITEM_ID1,ITEM_ID2
+```
+
+Para seleção de atributos:
+
+```text
+/items/bulk?ids=ITEM_ID1,ITEM_ID2&attributes=body.id,body.price,body.title
+```
+
+A documentação estabelece prazo de migração até:
+
+```text
+25/10/2026
+```
+
+Portanto, não implementar código novo utilizando `/items?ids=`.
+
+## [MELI-03] Gestão da aplicação
+
+https://developers.mercadolivre.com.br/pt_br/publicacao-de-produtos/gerencie-seu-aplicativo
+
+Fonte para informações da aplicação, permissões e gerenciamento das credenciais.
+
+Exemplo documentado:
+
+```http
+GET https://api.mercadolibre.com/applications/$APP_ID
+Authorization: Bearer $ACCESS_TOKEN
+```
+
+## [MELI-04] Requisitos/configuração inicial
+
+https://developers.mercadolivre.com.br/pt_br/configuracao-ou-requisitos-previos
+
+Fonte para o fluxo:
+
+```text
+Conta Mercado Livre
+        ↓
+Criar aplicação
+        ↓
+Client ID + Client Secret
+        ↓
+Autenticação
+        ↓
 Access Token
-Refresh Token
+        ↓
+API
 ```
 
-O cadastro de desenvolvedor/API é independente da lógica de afiliados.
+## [MELI-AFF-01] Geração oficial de links de afiliado
 
-Até existir endpoint oficial documentado para geração programática de links de afiliado, tratar:
+https://www.mercadolivre.com.br/l/afiliados-gere-seus-links
+
+Esta documentação pertence ao Programa de Afiliados e Criadores, não à Developers API.
+
+Ela documenta atualmente duas formas oficiais de geração de links:
 
 ```text
-affiliateUrl = null
+Gerador de Links
+Barra de Afiliados
 ```
 
-e permitir inserção/geração externa posteriormente.
+Até que seja encontrada documentação oficial de uma API pública para geração automática de links de afiliado, não assumir a existência de endpoint para essa função.
+
+## [MELI-AFF-02] Programa de Afiliados — começar a recomendar
+
+https://www.mercadolivre.com.br/l/comece-a-recomendar
+
+Referência oficial adicional sobre geração e utilização dos links do Programa de Afiliados e Criadores.
+
+## [MELI-AFF-03] Boas práticas para links
+
+https://www.mercadolivre.com.br/l/boas-praticas-links
+
+Consultar antes da implementação da publicação automática.
+
+Entre outras regras, o Mercado Livre orienta gerar links para produtos/ofertas específicos e verificar a URL antes da publicação.
+
+## [MELI-AFF-04] Páginas não permitidas para links afiliados
+
+https://www.mercadolivre.com.br/l/afiliados-paginas-nao-permitidas
+
+IMPORTANTE para o coletor.
+
+O Mercado Livre informa que links afiliados não devem ser gerados para determinadas páginas, incluindo:
+
+```text
+página inicial
+páginas de categorias
+ranking de mais vendidos
+página de vendedores
+Ofertas do Dia
+entre outras
+```
+
+Produtos individuais encontrados nessas páginas podem ser divulgados individualmente.
+
+Portanto, qualquer mecanismo que utilize categorias, rankings ou páginas de descoberta deve resolver o resultado até a página específica do produto antes da etapa de geração do link afiliado.
 
 ---
 
-# 11. Prioridade de implementação
+# Regra geral de implementação
 
-Implementar nesta ordem:
+Sempre que houver divergência entre este documento e a documentação oficial:
 
 ```text
-1. estrutura Product normalizada
-2. banco + histórico de preços
-3. AmazonProvider
-4. AliExpressProvider
-5. MercadoLivreProvider
-6. scheduler de coleta
-7. sistema de queries/categorias
-8. OfferScorer
-9. fila de candidatos
-10. publicação
+DOCUMENTAÇÃO OFICIAL > ESTE DOCUMENTO
 ```
 
-Amazon e AliExpress devem suportar links afiliados diretamente quando disponibilizados pela resposta/API.
+O Codex deve tratar este arquivo como:
 
-Mercado Livre deve inicialmente funcionar como fonte de descoberta e monitoramento de preço, mantendo a geração do link afiliado desacoplada.
+```text
+arquitetura desejada
++
+índice de documentação
++
+ponto de partida da implementação
+```
 
-Não implementar scraping ou bypass de mecanismos anti-bot enquanto existir fonte oficial suficiente para o dado desejado.
+e tratar as fontes oficiais como autoridade para:
+
+```text
+endpoints
+request bodies
+response schemas
+autenticação
+rate limits
+políticas
+campos disponíveis
+depreciações
+```
+
+Ao encontrar mudança relevante na documentação oficial, atualizar este arquivo junto com a implementação.
+
+---
+
+# 1. Amazon Brasil
+
+## API
+
+Usar a **Amazon Creators API**.
+
+Fontes:
+
+`[AMZ-01] [AMZ-06] [AMZ-09]`
+
+Base:
+
+```text
+https://creatorsapi.amazon/catalog/v1/
+```
+
+Marketplace brasileiro:
+
+```text
+www.amazon.com.br
+```
+
+Fonte: `[AMZ-07]`
+
+### SearchItems
+
+```text
+POST /catalog/v1/searchItems
+```
+
+Fonte primária: `[AMZ-02]`
+
+### GetItems
+
+```text
+POST /catalog/v1/getItems
+```
+
+Fonte primária: `[AMZ-03]`
+
+### GetVariations
+
+```text
+POST /catalog/v1/getVariations
+```
+
+Fonte primária: `[AMZ-04]`
+
+### GetBrowseNodes
+
+```text
+POST /catalog/v1/getBrowseNodes
+```
+
+Fonte primária: `[AMZ-05]`
+
+---
+
+# 2. AliExpress
+
+Gateway:
+
+```text
+https://eco.taobao.com/router/rest
+```
+
+Fonte: `[ALI-01]`
+
+Principal método inicial:
+
+```text
+aliexpress.affiliate.product.query
+```
+
+Fonte primária: `[ALI-01]`
+
+Os demais métodos deverão ter sua documentação específica consultada antes da implementação.
+
+---
+
+# 3. Mercado Livre
+
+Base:
+
+```text
+https://api.mercadolibre.com
+```
+
+Aplicação/autenticação:
+
+`[MELI-01] [MELI-03] [MELI-04]`
+
+Consulta múltipla de itens:
+
+```text
+GET /items/bulk?ids=...
+```
+
+Fonte primária: `[MELI-02]`
+
+Programa de afiliados e geração de links:
+
+`[MELI-AFF-01] [MELI-AFF-02] [MELI-AFF-03] [MELI-AFF-04]`
+
+Não criar integração programática de geração de links do Mercado Livre sem localizar primeiro documentação oficial que autorize e descreva essa operação.
+
+---
+
+> As demais seções de arquitetura, normalização, histórico de preços, providers, ranking e fluxo geral permanecem conforme especificadas abaixo neste documento.

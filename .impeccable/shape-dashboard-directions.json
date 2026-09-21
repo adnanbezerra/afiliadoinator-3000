@@ -1,0 +1,76 @@
+{
+  "title": "Escolha o universo visual do dashboard",
+  "question": "A direção principal transforma a curadoria de ofertas numa mesa de inspeção. Você pode mantê-la, escolher uma alternativa, pedir nova rodada ou seguir o padrão da categoria.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Mesa de Curadoria",
+      "kicker": "DIREÇÃO PRINCIPAL",
+      "lineage": "salas de amostras, fichas de inspeção e etiquetas de procedência",
+      "thesis": "Cada oferta chega como uma amostra a ser examinada, comparada e aprovada com evidências.",
+      "palette": ["#F3F0E8", "#252A2D", "#315C4C", "#D6A740"],
+      "materials": ["papel de inspeção", "etiquetas de procedência", "carimbos secos"],
+      "viewport": "Uma fila ranqueada ocupa a bancada central; a melhor oferta abre sua ficha de preço, qualidade, comissão e origem ao lado.",
+      "risk": "Pode parecer boutique e perder velocidade se a materialidade superar a densidade operacional.",
+      "sketch": ".impeccable/sketches/dashboard-curadoria.png"
+    },
+    {
+      "id": "challenger-wayfinding",
+      "label": "Central de Rotas",
+      "kicker": "ALTERNATIVA",
+      "lineage": "sinalização internacional de aeroportos",
+      "thesis": "O dashboard conduz cada oferta por decisões inequívocas: revisar, aprovar, preparar e publicar.",
+      "palette": ["#FFD51C", "#111111", "#FFFFFF", "#D9D9D4"],
+      "materials": ["painéis suspensos", "pictogramas", "faixas direcionais"],
+      "viewport": "Uma faixa amarela fixa resume a próxima decisão; a fila abaixo mostra destino, urgência e tempo desde a coleta.",
+      "risk": "A orientação é excelente, mas comunica menos sobre qualidade de produto e comparação de materiais.",
+      "case": "Ganha em clareza de fluxo; perde para a direção principal na identificação com o trabalho de curadoria.",
+      "sketch": ".impeccable/sketches/dashboard-wayfinding.png",
+      "hero": "https://impeccable.style/worlds/cards/wayfinding-cartography-signage-terminal-yellow-wayfinding-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/wayfinding-cartography-signage-terminal-yellow-wayfinding.webp"
+    },
+    {
+      "id": "challenger-depot",
+      "label": "Painel de Destinos",
+      "kicker": "ALTERNATIVA",
+      "lineage": "letreiros mecânicos de garagem e cursos de lona tingida",
+      "thesis": "A fila de ofertas avança como destinos num rolo mecânico; falhas ficam presas entre dois estados.",
+      "palette": ["#123B2E", "#F1CB3B", "#E9E2CF", "#1A1D1C"],
+      "materials": ["lona verde", "costura", "ilhós metálicos"],
+      "viewport": "Cursos empilhados mostram as ofertas prioritárias sob uma janela fixa; mudanças de status avançam um passo completo.",
+      "risk": "A personalidade é forte, mas o sistema pode limitar comparações detalhadas e controles familiares.",
+      "case": "Expressa monitoramento contínuo com força; perde em clareza para dados densos e ações secundárias.",
+      "sketch": ".impeccable/sketches/dashboard-depot.png",
+      "hero": "https://impeccable.style/worlds/cards/operate-c-depot-blind-courses-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/operate-c-depot-blind-courses.webp"
+    },
+    {
+      "id": "challenger-teletext",
+      "label": "Índice Teletext",
+      "kicker": "ALTERNATIVA",
+      "lineage": "revistas teletext em grade de 40 por 24 caracteres",
+      "thesis": "Ofertas, categorias e histórico viram páginas numeradas de consulta instantânea e alta densidade.",
+      "palette": ["#050505", "#FFFFFF", "#FFD400", "#00D7E8", "#E63A2E"],
+      "materials": ["células bitmap", "mosaicos de bloco", "páginas numeradas"],
+      "viewport": "A página 100 abre a fila; atalhos numéricos saltam para categorias, histórico e ofertas aprovadas.",
+      "risk": "A densidade favorece especialistas, mas pode transmitir nostalgia e cansar em uso prolongado.",
+      "case": "Ganha em velocidade e personalidade; perde em familiaridade e percepção contemporânea de qualidade.",
+      "sketch": ".impeccable/sketches/dashboard-teletext.png",
+      "hero": "https://impeccable.style/worlds/cards/broadcast-programming-teletext-service-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/broadcast-programming-teletext-service.webp"
+    }
+  ],
+  "reroll": true,
+  "canon": true,
+  "canonCard": {
+    "label": "Dashboard SaaS convencional",
+    "lineage": "painéis administrativos modernos",
+    "thesis": "Sidebar, indicadores, filtros e tabela de ofertas executados com alto acabamento e máxima familiaridade.",
+    "palette": ["#F7F8FA", "#17191C", "#3167E3", "#E4E7EC"],
+    "materials": ["superfícies neutras", "bordas discretas", "gráficos funcionais"],
+    "viewport": "Sidebar à esquerda, resumo operacional no topo e tabela ranqueada ocupando a área principal.",
+    "risk": "É imediatamente compreensível, mas pouco memorável e fácil de confundir com produtos vizinhos.",
+    "sketch": ".impeccable/sketches/dashboard-canon.png"
+  },
+  "steer": true
+}

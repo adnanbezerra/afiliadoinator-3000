@@ -46,6 +46,8 @@ Todos os marketplaces usam o mesmo endpoint:
 GET /api/products/search?provider=amazon&q=notebook&page=1&pageSize=10
 ```
 
+A busca exige uma sessão válida criada pelas rotas de autenticação.
+
 `provider` aceita `amazon`, `aliexpress` ou `mercado-livre`. `categoryId` é
 opcional. Cada adapter estende `AbstractMarketplaceAdapter`, que mantém o fluxo
 comum de busca, consulta individual e normalização para `Product`.

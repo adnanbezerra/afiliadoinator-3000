@@ -2,6 +2,8 @@ import {
   MarketplaceApiError,
   MarketplaceConfigurationError,
 } from "@apps/api-marketplaces";
+import { InvalidSessionError } from "@/src/modules/identity/application/shared/AuthError";
+import { requireAuthenticatedUser } from "@/src/modules/identity/infra/routes/require-authenticated-user";
 import { NextResponse, type NextRequest } from "next/server";
 import { ZodError } from "zod";
 import { getSearchProducts } from "../../application/SearchProducts/SearchProducts.factory";
@@ -11,6 +13,7 @@ export async function searchProductsRoute(
   request: NextRequest,
 ): Promise<Response> {
   try {
+    await requireAuthenticatedUser(request);
     const query = Object.fromEntries(request.nextUrl.searchParams);
     const input = searchProductsValidator.parse({
       ...query,
@@ -27,6 +30,13 @@ export async function searchProductsRoute(
           fields: error.flatten().fieldErrors,
         },
         { status: 400 },
+      );
+    }
+
+    if (error instanceof InvalidSessionError) {
+      return NextResponse.json(
+        { error: "Authentication required" },
+        { status: 401 },
       );
     }
 

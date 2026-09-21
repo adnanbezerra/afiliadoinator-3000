@@ -1,0 +1,45 @@
+{
+  "title": "Escolha a composição da autenticação",
+  "question": "As três opções mantêm a Mesa de Curadoria. Escolha a estrutura que deve orientar login e cadastro.",
+  "options": [
+    {
+      "id": "split-ledger",
+      "label": "Caderno dividido",
+      "kicker": "CONTEXTO + FOCO",
+      "lineage": "caderno de inspeção aberto com dossiê preso",
+      "thesis": "Explica o método do produto sem competir com um formulário compacto e inequívoco.",
+      "palette": ["#F3F0E8", "#252A2D", "#315C4C", "#D6A740"],
+      "materials": ["papel técnico", "prancheta", "etiquetas de procedência"],
+      "viewport": "Processo real à esquerda e formulário de acesso preso à direita.",
+      "risk": "O conteúdo explicativo precisa encolher bastante no celular.",
+      "hero": ".impeccable/mocks/auth-split-ledger.png"
+    },
+    {
+      "id": "inspection-passport",
+      "label": "Passaporte de inspeção",
+      "kicker": "FORMULÁRIO CENTRAL",
+      "lineage": "dossiê vertical com índice e trilha de evidências",
+      "thesis": "Transforma o acesso no centro absoluto, cercado por contexto mínimo do produto.",
+      "palette": ["#F3F0E8", "#252A2D", "#315C4C", "#D6A740"],
+      "materials": ["dossiê", "etiquetas", "carimbo seco"],
+      "viewport": "Índice à esquerda, formulário central e processo resumido à direita.",
+      "risk": "A moldura física pode ficar teatral se for literalizada demais.",
+      "hero": ".impeccable/mocks/auth-inspection-passport.png"
+    },
+    {
+      "id": "intake-sheet",
+      "label": "Ficha de entrada",
+      "kicker": "PRODUTO À VISTA",
+      "lineage": "folha de admissão sobre uma fila de inspeção",
+      "thesis": "Mostra imediatamente o ambiente que será liberado depois da autenticação.",
+      "palette": ["#F3F0E8", "#252A2D", "#315C4C", "#D6A740"],
+      "materials": ["folha contínua", "prancheta", "marcas de aprovação"],
+      "viewport": "Formulário dominante à esquerda e prévia abstrata da fila à direita.",
+      "risk": "A prévia pode disputar atenção com a tarefa de autenticação.",
+      "hero": ".impeccable/mocks/auth-intake-sheet.png"
+    }
+  ],
+  "reroll": false,
+  "canon": false,
+  "steer": true
+}

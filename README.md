@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Afiliadoinator 3000
 
-## Getting Started
+Monólito modular para descobrir, normalizar e acompanhar ofertas de e-commerces
+brasileiros. O projeto usa Next.js App Router, PostgreSQL e Prisma.
 
-First, run the development server:
+## Requisitos
+
+- Node.js 22+
+- pnpm 12+
+- PostgreSQL
+
+## Configuração
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+cp .env.example .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Preencha `DATABASE_URL` e gere um segredo aleatório com pelo menos 32 caracteres
+para `JWT_SECRET`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Crie e aplique a migration pelo Prisma CLI:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm db:migrate --name init
+```
 
-## Learn More
+O repositório não inclui migration escrita manualmente. Em produção, aplique as
+migrations já versionadas com `pnpm db:deploy`.
 
-To learn more about Next.js, take a look at the following resources:
+## Rotas de autenticação
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `POST /api/auth/register`: recebe `name`, `email` e `password`.
+- `POST /api/auth/login`: recebe `email` e `password`; grava JWT em cookie
+  `httpOnly`.
+- `GET /api/auth/me`: aceita o cookie ou `Authorization: Bearer <token>`.
+- `POST /api/auth/logout`: remove o cookie de sessão.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Senhas usam bcrypt com custo 12. O JWT expira em sete dias.
 
-## Deploy on Vercel
+## Arquitetura
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+app/api/                         adaptadores HTTP exigidos pelo App Router
+src/modules/identity/
+  application/                  casos de uso, contratos e factories
+  infra/                        Prisma, criptografia, validators e rotas
+src/modules/marketplaces/
+  application/shared/           Product e contratos dos providers
+  application/MarketplaceProviderRegistry/
+src/shared/infra/database/       composição do Prisma Client
+prisma/schema.prisma             schema PostgreSQL
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`MarketplaceProvider` normaliza Amazon, AliExpress, Mercado Livre e Shopee no
+mesmo tipo `Product`. Um novo e-commerce precisa implementar o contrato e ser
+registrado no `MarketplaceProviderRegistry`. O cliente HTTP externo deve ficar em
+`libs/api-<ecommerce>/`, separado do módulo, quando cada integração for criada.
+
+## Verificação
+
+```bash
+pnpm prisma:generate
+pnpm typecheck
+pnpm test
+pnpm lint
+pnpm build
+```

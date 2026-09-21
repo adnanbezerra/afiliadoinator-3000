@@ -7,6 +7,7 @@ Marketplaces iniciais:
 * Amazon Brasil
 * AliExpress
 * Mercado Livre Brasil
+* Shopee Brasil
 
 ---
 
@@ -621,13 +622,36 @@ ranking interno
 
 ---
 
+# 3.1 Shopee Brasil
+
+A conta deste projeto passou a ter acesso à integração da Shopee.
+
+Manter a Shopee como provider de primeira classe no modelo normalizado:
+
+```text
+provider = "shopee"
+```
+
+Credenciais previstas:
+
+```env
+SHOPEE_APP_ID=
+SHOPEE_APP_SECRET=
+```
+
+Os endpoints, assinatura e campos devem ser documentados a partir do material
+liberado para a conta antes da implementação. Não assumir compatibilidade entre
+Seller Open Platform e Affiliate Open Platform.
+
+---
+
 # 4. Modelo normalizado
 
 Todas as APIs devem ser convertidas para um formato interno único.
 
 ```ts
 interface Product {
-  provider: "amazon" | "aliexpress" | "mercadolivre";
+  provider: "amazon" | "aliexpress" | "mercado-livre" | "shopee";
 
   externalId: string;
 

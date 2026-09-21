@@ -38,6 +38,20 @@ migrations já versionadas com `pnpm db:deploy`.
 
 Senhas usam bcrypt com custo 12. O JWT expira em sete dias.
 
+## Busca de produtos
+
+Todos os marketplaces usam o mesmo endpoint:
+
+```http
+GET /api/products/search?provider=amazon&q=notebook&page=1&pageSize=10
+```
+
+`provider` aceita `amazon`, `aliexpress` ou `mercado-livre`. `categoryId` é
+opcional. Cada adapter estende `AbstractMarketplaceAdapter`, que mantém o fluxo
+comum de busca, consulta individual e normalização para `Product`.
+
+Preencha as credenciais correspondentes no `.env` antes de usar cada provider.
+
 ## Arquitetura
 
 ```text

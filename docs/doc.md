@@ -7,6 +7,7 @@ Marketplaces iniciais:
 * Amazon Brasil
 * AliExpress
 * Mercado Livre Brasil
+* Shopee Brasil
 
 ---
 
@@ -319,55 +320,100 @@ https://developers.mercadolivre.com.br/pt_br/configuracao-ou-requisitos-previos
 Fonte para o fluxo:
 
 ```text
-Conta Mercado Livre
-        ↓
-Criar aplicação
-        ↓
-Client ID + Client Secret
-        ↓
-Autenticação
-        ↓
-Access Token
-        ↓
-API
+categoria
+   ↓
+/highlights
+   ↓
+20 best sellers
+   ↓
+consultar detalhes
+   ↓
+armazenar
+   ↓
+ranking interno
 ```
 
-## [MELI-AFF-01] Geração oficial de links de afiliado
+---
 
-https://www.mercadolivre.com.br/l/afiliados-gere-seus-links
+# 3.1 Shopee Brasil
 
-Esta documentação pertence ao Programa de Afiliados e Criadores, não à Developers API.
+A conta deste projeto passou a ter acesso à integração da Shopee.
 
-Ela documenta atualmente duas formas oficiais de geração de links:
+Manter a Shopee como provider de primeira classe no modelo normalizado:
 
 ```text
-Gerador de Links
-Barra de Afiliados
+provider = "shopee"
 ```
 
-Até que seja encontrada documentação oficial de uma API pública para geração automática de links de afiliado, não assumir a existência de endpoint para essa função.
+Credenciais previstas:
 
-## [MELI-AFF-02] Programa de Afiliados — começar a recomendar
+```env
+SHOPEE_APP_ID=
+SHOPEE_APP_SECRET=
+```
 
-https://www.mercadolivre.com.br/l/comece-a-recomendar
+Os endpoints, assinatura e campos devem ser documentados a partir do material
+liberado para a conta antes da implementação. Não assumir compatibilidade entre
+Seller Open Platform e Affiliate Open Platform.
 
-Referência oficial adicional sobre geração e utilização dos links do Programa de Afiliados e Criadores.
+---
 
-## [MELI-AFF-03] Boas práticas para links
+# 4. Modelo normalizado
 
-https://www.mercadolivre.com.br/l/boas-praticas-links
+Todas as APIs devem ser convertidas para um formato interno único.
 
-Consultar antes da implementação da publicação automática.
+```ts
+interface Product {
+  provider: "amazon" | "aliexpress" | "mercado-livre" | "shopee";
 
-Entre outras regras, o Mercado Livre orienta gerar links para produtos/ofertas específicos e verificar a URL antes da publicação.
+  externalId: string;
 
-## [MELI-AFF-04] Páginas não permitidas para links afiliados
+  title: string;
 
-https://www.mercadolivre.com.br/l/afiliados-paginas-nao-permitidas
+  currentPrice: number;
+  originalPrice?: number;
 
-IMPORTANTE para o coletor.
+  currency: "BRL";
 
-O Mercado Livre informa que links afiliados não devem ser gerados para determinadas páginas, incluindo:
+  discountPercentage?: number;
+
+  imageUrl?: string;
+
+  productUrl: string;
+  affiliateUrl?: string;
+
+  categoryId?: string;
+  categoryName?: string;
+
+  rating?: number;
+  salesVolume?: number;
+  salesRank?: number;
+
+  commissionRate?: number;
+
+  lastSeenAt: Date;
+}
+```
+
+---
+
+# 5. Providers
+
+Criar:
+
+```ts
+interface MarketplaceProvider {
+  searchProducts(query: string): Promise<Product[]>;
+
+  getProduct(id: string): Promise<Product | null>;
+
+  getTrendingProducts?(): Promise<Product[]>;
+
+  getCategoryProducts?(categoryId: string): Promise<Product[]>;
+}
+```
+
+Implementações:
 
 ```text
 página inicial

@@ -19,7 +19,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@apps/api-marketplaces": ["./libs/api-marketplaces/src/index.ts"],
+      "@apps/api-amazon": ["./libs/api-amazon/src/index.ts"],
+      "@apps/api-aliexpress": ["./libs/api-aliexpress/src/index.ts"],
+      "@apps/api-mercado-livre": ["./libs/api-mercado-livre/src/index.ts"]
     }
   },
   "include": [

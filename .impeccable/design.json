@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-22T00:20:00Z",
+  "title": "Design System: Afiliadoinator 3000",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Papel Quente",
+        "canonical": "#f3f0e8",
+        "tonalRamp": ["#29261f", "#474239", "#655f53", "#837c6d", "#a49c8b", "#c6bead", "#e3ddcf", "#f3f0e8"]
+      },
+      "paper-deep": {
+        "role": "neutral",
+        "displayName": "Papel Profundo",
+        "canonical": "#eae5d9",
+        "tonalRamp": ["#27241e", "#454038", "#625c51", "#80796b", "#9f9889", "#beb7a8", "#dad4c7", "#eae5d9"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Tinta de Inspeção",
+        "canonical": "#252a2d",
+        "tonalRamp": ["#15181a", "#252a2d", "#3d4448", "#596164", "#777f81", "#989fa0", "#bbc0c0", "#e5e7e6"]
+      },
+      "approval": {
+        "role": "primary",
+        "displayName": "Verde de Aprovação",
+        "canonical": "#315c4c",
+        "tonalRamp": ["#10261f", "#1d3c31", "#315c4c", "#4f7768", "#719487", "#96b1a6", "#bed0c9", "#e8f0ed"]
+      },
+      "ochre-detail": {
+        "role": "secondary",
+        "displayName": "Ocre de Arquivo",
+        "canonical": "#d6a740",
+        "tonalRamp": ["#2d2109", "#513b10", "#77591b", "#9b7728", "#bd9635", "#d6a740", "#e8c979", "#f7ebca"]
+      },
+      "danger": {
+        "role": "primary",
+        "displayName": "Vermelho de Exceção",
+        "canonical": "#9e3732",
+        "tonalRamp": ["#2d1110", "#511b19", "#762723", "#9e3732", "#bc5a54", "#d5827d", "#e9b0ac", "#f8e4e2"]
+      },
+      "on-approval": {
+        "role": "neutral",
+        "displayName": "Marfim de Ação",
+        "canonical": "#f8f4e9",
+        "tonalRamp": ["#29261f", "#484239", "#675f52", "#867d6d", "#a79c8a", "#c9bdab", "#e6ded0", "#f8f4e9"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Roboto Slab Display",
+        "purpose": "Marca, títulos e ações decisivas na autenticação."
+      },
+      "headline": {
+        "displayName": "Roboto Slab Headline",
+        "purpose": "Título principal do formulário."
+      },
+      "body": {
+        "displayName": "Geist Body",
+        "purpose": "Descrições e ajuda funcional."
+      },
+      "label": {
+        "displayName": "Geist Mono Metadata",
+        "purpose": "Metadados e etapas do processo."
+      }
+    },
+    "shadows": [
+      {
+        "name": "desk-dossier",
+        "value": "0 28px 70px rgba(8, 15, 14, 0.38), 0 5px 12px rgba(8, 15, 14, 0.24)",
+        "purpose": "Separar o dossiê e suas folhas sobrepostas da mesa grafite."
+      },
+      {
+        "name": "approval-hover",
+        "value": "0 9px 20px rgba(36, 75, 60, 0.24)",
+        "purpose": "Elevar discretamente a ação principal no hover."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-fast",
+        "value": "180ms ease",
+        "purpose": "Estados de campo e botão."
+      },
+      {
+        "name": "dossier-reveal",
+        "value": "520ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entrada única do dossiê; desabilitada com reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "process-hidden",
+        "value": "860px"
+      },
+      {
+        "name": "mobile-sheet",
+        "value": "640px"
+      },
+      {
+        "name": "mobile-header-stacked",
+        "value": "420px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Approval Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação principal verde com lettering slab.",
+      "html": "<button class=\"ds-approval-button\" type=\"button\">Continuar →</button>",
+      "css": ".ds-approval-button { min-height: 62px; padding: 0 24px; border: 0; border-radius: 4px; background: var(--approval); color: #f8f4e9; font-family: var(--font-slab), serif; font-size: 1.12rem; font-weight: 700; cursor: pointer; } .ds-approval-button:hover { box-shadow: 0 9px 20px rgba(36,75,60,.24); transform: translateY(-2px); } .ds-approval-button:focus-visible { outline: 3px solid rgba(49,92,76,.32); outline-offset: 3px; }"
+    },
+    {
+      "name": "Icon Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Campo de papel com ícone documental e divisória interna.",
+      "html": "<label class=\"ds-field\"><span>E-mail</span><span class=\"ds-field-control\"><span aria-hidden=\"true\">✉</span><input type=\"email\" placeholder=\"seu@email.com\"></span></label>",
+      "css": ".ds-field { display: grid; gap: 8px; color: var(--ink); font-family: var(--font-slab), serif; font-weight: 700; } .ds-field-control { position: relative; display: grid; grid-template-columns: 48px 1fr; height: 58px; border: 1px solid rgba(37,42,45,.52); border-radius: 4px; background: rgba(255,255,255,.22); } .ds-field-control > span { display: grid; place-items: center; border-right: 1px solid rgba(37,42,45,.18); } .ds-field input { min-width: 0; border: 0; background: transparent; padding: 0 18px; color: var(--ink); } .ds-field-control:focus-within { outline: 3px solid rgba(49,92,76,.17); }"
+    },
+    {
+      "name": "Authentication Index",
+      "kind": "nav",
+      "description": "Índice vertical de autenticação com rota atual em etiqueta apontada.",
+      "html": "<nav class=\"ds-auth-index\"><a class=\"ds-current\" href=\"#\">Entrar</a><a href=\"#\">Criar conta</a></nav>",
+      "css": ".ds-auth-index { display: grid; gap: 8px; font-family: var(--font-slab), serif; } .ds-auth-index a { min-height: 66px; display: flex; align-items: center; padding: 0 17px; color: #3c4542; text-decoration: none; } .ds-auth-index .ds-current { margin-right: -28px; padding-right: 36px; background: var(--approval); color: #f8f4e9; clip-path: polygon(0 0,calc(100% - 22px) 0,100% 50%,calc(100% - 22px) 100%,0 100%); } .ds-auth-index a:focus-visible { outline: 3px solid rgba(49,92,76,.3); outline-offset: 3px; }"
+    },
+    {
+      "name": "Slab Wordmark",
+      "kind": "custom",
+      "description": "Marca empilhada em slab robusta no índice de papel.",
+      "html": "<a class=\"ds-wordmark\" href=\"#\">Afiliadoinator <span>3000</span></a>",
+      "css": ".ds-wordmark { color: var(--ink); font-family: var(--font-slab), serif; font-size: 2rem; font-weight: 700; letter-spacing: -.035em; line-height: .98; text-decoration: none; } .ds-wordmark span { display: block; } .ds-wordmark:focus-visible { outline: 3px solid rgba(49,92,76,.3); outline-offset: 3px; }"
+    },
+    {
+      "name": "Three-Column Dossier",
+      "kind": "card",
+      "refersTo": "authentication-frame",
+      "description": "Índice, formulário e processo sobre folhas kraft e papel.",
+      "html": "<section class=\"ds-dossier\"><aside>Índice</aside><main>Formulário</main><aside>Processo</aside></section>",
+      "css": ".ds-dossier { display: grid; grid-template-columns: minmax(180px,.62fr) minmax(440px,1.65fr) minmax(240px,.78fr); min-height: 760px; border: 1px solid rgba(54,50,40,.48); border-radius: 0; background: var(--paper); color: var(--ink); box-shadow: 0 28px 70px rgba(8,15,14,.38),0 5px 12px rgba(8,15,14,.24); } .ds-dossier > * + * { border-left: 1px solid rgba(50,48,42,.2); }"
+    },
+    {
+      "name": "Process Evidence Tag",
+      "kind": "custom",
+      "description": "Etiqueta ocre com ilhó, pictograma documental e fita.",
+      "html": "<div class=\"ds-process-tag\"><span class=\"ds-eyelet\"></span><svg viewBox=\"0 0 32 32\" aria-hidden=\"true\"><circle cx=\"16\" cy=\"16\" r=\"11\"/><path d=\"M5 16h22\"/></svg></div>",
+      "css": ".ds-process-tag { position: relative; display: grid; place-items: center; width: 105px; height: 48px; background: var(--tag); clip-path: polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%); filter: drop-shadow(2px 4px 4px rgba(64,51,26,.16)); } .ds-eyelet { position: absolute; left: 9px; width: 14px; height: 14px; border: 3px solid #46483f; border-radius: 50%; background: var(--paper-deep); } .ds-process-tag svg { width: 30px; height: 30px; margin-left: 14px; fill: none; stroke: #343a36; stroke-width: 2.3; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Passaporte de Inspeção",
+    "overview": "O sistema apresenta a curadoria como um dossiê físico aberto sobre uma mesa de trabalho: papéis empilhados, índice lateral, etiquetas de evidência e marcas de aprovação. A composição é deliberadamente rica e tátil, enquanto o formulário permanece central e imediatamente reconhecível.\n\nA materialidade vem da mesa grafite, fibras de papel, folhas kraft, clips, fita adesiva, selos e etiquetas ocres. Roboto Slab dá voz editorial à marca, aos títulos e às ações principais; Geist e Geist Mono mantêm explicações e metadados legíveis.",
+    "keyCharacteristics": [
+      "Mesa grafite com um dossiê de papel quente em três colunas.",
+      "Camadas físicas visíveis: kraft, clip, fita, textura e selo.",
+      "Formulário central ladeado por índice e processo.",
+      "Ocre usado em etiquetas de evidência e pequenos detalhes."
+    ],
+    "rules": [
+      {
+        "name": "The Evidence Tag Rule",
+        "body": "Use ocre for documentary tags and tape, never for primary actions or body text.",
+        "section": "colors"
+      },
+      {
+        "name": "The Approval Green Rule",
+        "body": "Use green for action, focus, current navigation and approval marks.",
+        "section": "colors"
+      },
+      {
+        "name": "The Layered Dossier Rule",
+        "body": "Depth belongs to the paper stack and attached objects; controls remain flat until interaction.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve the three-column passport composition and the dark curator desk on desktop.",
+      "Do keep clips, tape, seals and stacked sheets subordinate to the functional form.",
+      "Do flatten the physical scene on mobile so authentication remains usable."
+    ],
+    "donts": [
+      "Don't simplify the desktop surface back into a generic split-screen or empty card.",
+      "Don't remove the process rail, evidence tags, seal, clip, tape or layered paper from desktop.",
+      "Don't invent marketplace claims, metrics or testimonials."
+    ]
+  }
+}

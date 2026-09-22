@@ -384,17 +384,6 @@
   outline-offset: 3px;
 }
 
-.error {
-  margin: 0;
-  padding: 14px 16px;
-  border: 1px solid color-mix(in srgb, var(--danger) 58%, transparent);
-  border-radius: 4px;
-  background: color-mix(in srgb, var(--danger) 8%, white);
-  color: var(--danger);
-  font-size: 0.84rem;
-  line-height: 1.5;
-}
-
 .submit {
   min-height: 62px;
   margin-top: 8px;

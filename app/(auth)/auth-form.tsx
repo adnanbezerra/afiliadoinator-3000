@@ -86,7 +86,6 @@ export function AuthForm({ mode }: AuthFormProps) {
   const isRegister = mode === "register";
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState("");
   const [fieldErrors, setFieldErrors] = useState<
     Partial<Record<FieldName, string>>
   >({});
@@ -94,7 +93,6 @@ export function AuthForm({ mode }: AuthFormProps) {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsSubmitting(true);
-    setMessage("");
     setFieldErrors({});
 
     const form = new FormData(event.currentTarget);
@@ -121,8 +119,18 @@ export function AuthForm({ mode }: AuthFormProps) {
 
       if (!response.ok) {
         const error = await readError(response);
-        setMessage(error.message);
         setFieldErrors(error.fields);
+
+        if (Object.keys(error.fields).length === 0) {
+          toast.add({
+            title: isRegister
+              ? "Não foi possível criar sua conta"
+              : "Não foi possível entrar",
+            description: error.message,
+            type: "error",
+          });
+        }
+
         return;
       }
 
@@ -133,7 +141,11 @@ export function AuthForm({ mode }: AuthFormProps) {
 
         if (!sessionResponse.ok) {
           const error = await readError(sessionResponse);
-          setMessage(error.message);
+          toast.add({
+            title: "Sessão não iniciada",
+            description: error.message,
+            type: "error",
+          });
           return;
         }
 
@@ -147,7 +159,11 @@ export function AuthForm({ mode }: AuthFormProps) {
       router.replace("/");
       router.refresh();
     } catch {
-      setMessage("Não foi possível conectar ao servidor. Tente novamente.");
+      toast.add({
+        title: "Falha de conexão",
+        description: "Não foi possível conectar ao servidor. Tente novamente.",
+        type: "error",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -239,12 +255,6 @@ export function AuthForm({ mode }: AuthFormProps) {
           </small>
         ) : null}
       </label>
-
-      {message && (
-        <p className={styles.error} role="alert">
-          {message}
-        </p>
-      )}
 
       <button
         className={styles.submit}

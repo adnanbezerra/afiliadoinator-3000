@@ -1,11 +1,13 @@
 .page {
+  --page-gutter: clamp(28px, 4vw, 64px);
+
   min-height: 100dvh;
   display: grid;
   place-items: center;
-  padding: clamp(28px, 4vw, 64px);
+  padding: var(--page-gutter);
   background:
     linear-gradient(rgba(24, 32, 31, 0.08), rgba(24, 32, 31, 0.08)),
-    url("/auth-inspection-passport.webp") center / cover fixed,
+    url("/auth-curator-desk.webp") center / cover fixed,
     #202b29;
 }
 
@@ -15,7 +17,10 @@
   display: grid;
   grid-template-columns: minmax(180px, 0.62fr) minmax(440px, 1.65fr) minmax(240px, 0.78fr);
   width: min(1200px, 100%);
-  min-height: min(860px, calc(100dvh - 96px));
+  min-height: min(
+    860px,
+    calc(100dvh - var(--page-gutter) - var(--page-gutter))
+  );
   border: 1px solid rgba(54, 50, 40, 0.48);
   box-shadow:
     0 28px 70px rgba(8, 15, 14, 0.38),
@@ -607,7 +612,7 @@
 
 @media (max-width: 1080px) {
   .page {
-    padding: 24px;
+    --page-gutter: 24px;
   }
 
   .frame {

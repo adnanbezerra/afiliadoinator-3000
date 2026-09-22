@@ -9,7 +9,7 @@
 
 | Visible ingredient | Commitment | Medium |
 | --- | --- | --- |
-| Curator desk | Original approved comp is reused as the desktop backdrop so its notebooks, photos, maps, clips, and dark surface remain exact | Raster background asset |
+| Curator desk | A text-free derivative of the approved comp preserves its notebooks, photos, maps, clips, and dark surface without duplicating the live interface behind the dossier | Raster background asset |
 | Product identity | Large Roboto Slab wordmark in the left paper index | Semantic HTML/CSS |
 | Authentication index | Entrar and Criar conta form a vertical index; the active route becomes a green pointed tag | Semantic HTML/CSS |
 | Form dossier | Dominant central paper sheet with Roboto Slab heading, icon-led square controls, password reveal, error states, and primary/alternate actions | Semantic HTML/CSS |

@@ -1,19 +1,26 @@
 import type { RegisterUserDto } from "../../infra/validators/register-user.validator";
 import { EmailAlreadyRegisteredError } from "../shared/AuthError";
 import type { PasswordHasher } from "../shared/PasswordHasher";
+import type { TokenService } from "../shared/TokenService";
 import {
   toPublicUser,
   type PublicUser,
   type UserRepository,
 } from "../shared/UserRepository";
 
+export interface RegistrationResult {
+  token: string;
+  user: PublicUser;
+}
+
 export class RegisterUser {
   constructor(
     private readonly users: UserRepository,
     private readonly passwordHasher: PasswordHasher,
+    private readonly tokens: TokenService,
   ) {}
 
-  async execute(input: RegisterUserDto): Promise<PublicUser> {
+  async execute(input: RegisterUserDto): Promise<RegistrationResult> {
     const existingUser = await this.users.findByEmail(input.email);
 
     if (existingUser) {
@@ -27,6 +34,9 @@ export class RegisterUser {
       passwordHash,
     });
 
-    return toPublicUser(user);
+    return {
+      token: await this.tokens.sign({ userId: user.id }),
+      user: toPublicUser(user),
+    };
   }
 }

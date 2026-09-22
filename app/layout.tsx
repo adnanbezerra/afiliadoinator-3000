@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Newsreader, Roboto_Slab } from "next/font/google";
+import { Toaster } from "@/components/ui/toast";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -47,6 +48,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           }}
         />
         {children}
+        <Toaster timeout={5000} />
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { EmailAlreadyRegisteredError } from "../shared/AuthError";
 import type { PasswordHasher } from "../shared/PasswordHasher";
+import type { TokenService } from "../shared/TokenService";
 import type {
   CreateUserData,
   UserRecord,
@@ -36,10 +37,15 @@ const passwordHasher: PasswordHasher = {
   compare: async (password, hash) => hash === `hashed:${password}`,
 };
 
+const tokens: TokenService = {
+  sign: async ({ userId }) => `token:${userId}`,
+  verify: async (token) => ({ userId: token.replace("token:", "") }),
+};
+
 describe("RegisterUser", () => {
   it("creates a user without exposing the password hash", async () => {
     const users = new InMemoryUserRepository();
-    const useCase = new RegisterUser(users, passwordHasher);
+    const useCase = new RegisterUser(users, passwordHasher, tokens);
 
     const result = await useCase.execute({
       name: "Adnan",
@@ -47,14 +53,15 @@ describe("RegisterUser", () => {
       password: "password1",
     });
 
-    expect(result.email).toBe("adnan@example.com");
-    expect(result).not.toHaveProperty("passwordHash");
+    expect(result.token).toBe(`token:${users.records[0].id}`);
+    expect(result.user.email).toBe("adnan@example.com");
+    expect(result.user).not.toHaveProperty("passwordHash");
     expect(users.records[0].passwordHash).toBe("hashed:password1");
   });
 
   it("rejects a duplicated email", async () => {
     const users = new InMemoryUserRepository();
-    const useCase = new RegisterUser(users, passwordHasher);
+    const useCase = new RegisterUser(users, passwordHasher, tokens);
     const input = {
       name: "Adnan",
       email: "adnan@example.com",

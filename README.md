@@ -30,7 +30,7 @@ migrations já versionadas com `pnpm db:deploy`.
 
 ## Rotas de autenticação
 
-- `POST /api/auth/register`: recebe `name`, `email` e `password`.
+- `POST /api/auth/register`: recebe `name`, `email` e `password`; cria a conta e grava o JWT em cookie `httpOnly`.
 - `POST /api/auth/login`: recebe `email` e `password`; grava JWT em cookie
   `httpOnly`.
 - `GET /api/auth/me`: aceita o cookie ou `Authorization: Bearer <token>`.

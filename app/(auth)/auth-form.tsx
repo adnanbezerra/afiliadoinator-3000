@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
+import { toast } from "@/components/ui/toast";
 import styles from "./auth.module.css";
 
 type AuthMode = "login" | "register";
@@ -97,40 +98,36 @@ export function AuthForm({ mode }: AuthFormProps) {
     const password = String(form.get("password") ?? "");
 
     try {
-      if (isRegister) {
-        const registerResponse = await fetch("/api/auth/register", {
+      const response = await fetch(
+        isRegister ? "/api/auth/register" : "/api/auth/login",
+        {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: String(form.get("name") ?? ""),
-            email,
-            password,
-          }),
-        });
+          body: JSON.stringify(
+            isRegister
+              ? {
+                  name: String(form.get("name") ?? ""),
+                  email,
+                  password,
+                }
+              : { email, password },
+          ),
+        },
+      );
 
-        if (!registerResponse.ok) {
-          const error = await readError(registerResponse);
-          setMessage(error.message);
-          setFieldErrors(error.fields);
-          return;
-        }
-      }
-
-      const loginResponse = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!loginResponse.ok) {
-        const error = await readError(loginResponse);
-        setMessage(
-          isRegister
-            ? "Conta criada. Entre novamente com o e-mail e a senha cadastrados."
-            : error.message,
-        );
+      if (!response.ok) {
+        const error = await readError(response);
+        setMessage(error.message);
         setFieldErrors(error.fields);
         return;
+      }
+
+      if (isRegister) {
+        toast.add({
+          title: "Conta criada com sucesso",
+          description: "Sua sessão já foi iniciada.",
+          type: "success",
+        });
       }
 
       router.replace("/");

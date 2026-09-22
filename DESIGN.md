@@ -233,6 +233,14 @@ Three real product steps: Coleta, Histórico de preço, and Aprovação humana.
 - **Color:** Dark ink on warm paper with ochre evidence tags.
 - **Responsive:** Hidden below 860px so the form remains usable.
 
+### Success Toast
+
+Compact confirmation that survives navigation after a completed action.
+
+- **Shape:** Four-pixel paper corner with one-pixel ink border and soft ambient shadow.
+- **Color:** Warm paper, dark ink, and approval green for the status icon.
+- **Behavior:** Appears in the lower-right corner on desktop, remains reachable on mobile, dismisses automatically, and exposes an explicit close control.
+
 ## Do's and Don'ts
 
 ### Do:

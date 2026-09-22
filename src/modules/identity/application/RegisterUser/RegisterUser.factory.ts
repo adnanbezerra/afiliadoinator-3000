@@ -5,8 +5,8 @@ let registerUser: RegisterUser | undefined;
 
 export function getRegisterUser(): RegisterUser {
   if (!registerUser) {
-    const { passwordHasher, users } = getIdentityDependencies();
-    registerUser = new RegisterUser(users, passwordHasher);
+    const { passwordHasher, tokens, users } = getIdentityDependencies();
+    registerUser = new RegisterUser(users, passwordHasher, tokens);
   }
 
   return registerUser;

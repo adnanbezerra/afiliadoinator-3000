@@ -30,6 +30,7 @@ const passwordHasher: PasswordHasher = {
 };
 
 const tokens: TokenService = {
+  assertReady: () => undefined,
   sign: async ({ userId }) => `token:${userId}`,
   verify: async (token) => ({ userId: token.replace("token:", "") }),
 };

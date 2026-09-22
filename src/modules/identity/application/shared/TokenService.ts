@@ -3,6 +3,7 @@ export interface TokenPayload {
 }
 
 export interface TokenService {
+  assertReady(): void;
   sign(payload: TokenPayload): Promise<string>;
   verify(token: string): Promise<TokenPayload>;
 }

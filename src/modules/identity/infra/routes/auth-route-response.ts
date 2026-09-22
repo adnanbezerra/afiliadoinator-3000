@@ -1,12 +1,21 @@
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import {
+  AuthConfigurationError,
   EmailAlreadyRegisteredError,
   InvalidCredentialsError,
   InvalidSessionError,
 } from "../../application/shared/AuthError";
 
 export function authRouteError(error: unknown): NextResponse {
+  if (error instanceof AuthConfigurationError) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "Authentication service unavailable" },
+      { status: 503 },
+    );
+  }
+
   if (error instanceof ZodError) {
     return NextResponse.json(
       {

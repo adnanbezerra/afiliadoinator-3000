@@ -21,6 +21,8 @@ export class RegisterUser {
   ) {}
 
   async execute(input: RegisterUserDto): Promise<RegistrationResult> {
+    this.tokens.assertReady();
+
     const existingUser = await this.users.findByEmail(input.email);
 
     if (existingUser) {

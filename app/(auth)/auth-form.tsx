@@ -45,8 +45,12 @@ function FieldIcon({ type }: { type: FieldName }) {
 }
 
 const genericErrors: Record<string, string> = {
+  "Authentication service unavailable":
+    "O serviço de autenticação está temporariamente indisponível. Tente novamente em instantes.",
   "Email already registered": "Este e-mail já está cadastrado.",
   "Invalid email or password": "E-mail ou senha incorretos.",
+  "Invalid or expired session":
+    "Conta criada, mas a sessão não pôde ser iniciada. Acesse Entrar e tente novamente.",
 };
 
 function translateFieldError(field: FieldName, error: string): string {
@@ -123,6 +127,16 @@ export function AuthForm({ mode }: AuthFormProps) {
       }
 
       if (isRegister) {
+        const sessionResponse = await fetch("/api/auth/me", {
+          cache: "no-store",
+        });
+
+        if (!sessionResponse.ok) {
+          const error = await readError(sessionResponse);
+          setMessage(error.message);
+          return;
+        }
+
         toast.add({
           title: "Conta criada com sucesso",
           description: "Sua sessão já foi iniciada.",

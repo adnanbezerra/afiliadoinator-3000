@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { EmailAlreadyRegisteredError } from "../shared/AuthError";
+import {
+  AuthConfigurationError,
+  EmailAlreadyRegisteredError,
+} from "../shared/AuthError";
 import type { PasswordHasher } from "../shared/PasswordHasher";
 import type { TokenService } from "../shared/TokenService";
 import type {
@@ -38,6 +41,7 @@ const passwordHasher: PasswordHasher = {
 };
 
 const tokens: TokenService = {
+  assertReady: () => undefined,
   sign: async ({ userId }) => `token:${userId}`,
   verify: async (token) => ({ userId: token.replace("token:", "") }),
 };
@@ -73,5 +77,29 @@ describe("RegisterUser", () => {
     await expect(useCase.execute(input)).rejects.toBeInstanceOf(
       EmailAlreadyRegisteredError,
     );
+  });
+
+  it("does not create a user when token configuration is unavailable", async () => {
+    const users = new InMemoryUserRepository();
+    const unavailableTokens: TokenService = {
+      ...tokens,
+      assertReady: () => {
+        throw new AuthConfigurationError("Missing JWT secret");
+      },
+    };
+    const useCase = new RegisterUser(
+      users,
+      passwordHasher,
+      unavailableTokens,
+    );
+
+    await expect(
+      useCase.execute({
+        name: "Adnan",
+        email: "adnan@example.com",
+        password: "password1",
+      }),
+    ).rejects.toBeInstanceOf(AuthConfigurationError);
+    expect(users.records).toHaveLength(0);
   });
 });

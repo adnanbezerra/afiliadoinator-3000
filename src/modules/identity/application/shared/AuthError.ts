@@ -18,3 +18,10 @@ export class InvalidSessionError extends Error {
     this.name = "InvalidSessionError";
   }
 }
+
+export class AuthConfigurationError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "AuthConfigurationError";
+  }
+}

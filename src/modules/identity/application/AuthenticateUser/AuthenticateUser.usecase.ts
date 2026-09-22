@@ -21,6 +21,8 @@ export class AuthenticateUser {
   ) {}
 
   async execute(input: AuthenticateUserDto): Promise<AuthenticationResult> {
+    this.tokens.assertReady();
+
     const user = await this.users.findByEmail(input.email);
 
     if (!user) {

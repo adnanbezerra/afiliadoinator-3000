@@ -1,4 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { AuthConfigurationError } from "../../application/shared/AuthError";
 
 const { execute } = vi.hoisted(() => ({ execute: vi.fn() }));
 
@@ -11,6 +12,10 @@ import { registerUserRoute } from "./register-user.route";
 describe("registerUserRoute", () => {
   beforeEach(() => {
     execute.mockReset();
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   it("creates the session cookie with the registration token", async () => {
@@ -44,5 +49,29 @@ describe("registerUserRoute", () => {
     );
     expect(response.headers.get("set-cookie")).toContain("HttpOnly");
     expect(response.headers.get("set-cookie")).toContain("SameSite=lax");
+  });
+
+  it("returns 503 when authentication is not configured", async () => {
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    execute.mockRejectedValue(
+      new AuthConfigurationError("JWT_SECRET must contain at least 32 characters"),
+    );
+
+    const response = await registerUserRoute(
+      new Request("http://localhost/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "Adnan",
+          email: "adnan@example.com",
+          password: "password1",
+        }),
+      }),
+    );
+
+    expect(response.status).toBe(503);
+    await expect(response.json()).resolves.toEqual({
+      error: "Authentication service unavailable",
+    });
   });
 });

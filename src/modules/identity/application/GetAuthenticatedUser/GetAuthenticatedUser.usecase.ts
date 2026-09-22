@@ -13,6 +13,8 @@ export class GetAuthenticatedUser {
   ) {}
 
   async execute(token: string): Promise<PublicUser> {
+    this.tokens.assertReady();
+
     let userId: string;
 
     try {

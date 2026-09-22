@@ -15,13 +15,13 @@ colors:
   on-approval: "#f8f4e9"
 typography:
   display:
-    fontFamily: "var(--font-newsreader), serif"
-    fontSize: "clamp(2.8rem, 4.6vw, 4.7rem)"
-    fontWeight: 500
-    lineHeight: 0.94
-    letterSpacing: "-0.045em"
+    fontFamily: "var(--font-slab), serif"
+    fontSize: "clamp(2.55rem, 4.4vw, 4.2rem)"
+    fontWeight: 700
+    lineHeight: 0.96
+    letterSpacing: "-0.04em"
   headline:
-    fontFamily: "var(--font-newsreader), serif"
+    fontFamily: "var(--font-slab), serif"
     fontSize: "clamp(2.25rem, 4.4vw, 4rem)"
     lineHeight: 1.02
     letterSpacing: "-0.04em"
@@ -35,9 +35,9 @@ typography:
     fontSize: "0.84rem"
     fontWeight: 720
 rounded:
-  action: "8px"
-  control: "12px"
-  frame: "14px"
+  action: "4px"
+  control: "4px"
+  frame: "4px"
 spacing:
   xs: "4px"
   sm: "9px"
@@ -49,57 +49,57 @@ components:
     backgroundColor: "{colors.approval}"
     textColor: "{colors.on-approval}"
     rounded: "{rounded.control}"
-    height: "56px"
+    height: "62px"
   button-primary-hover:
     backgroundColor: "#244b3c"
     textColor: "{colors.on-approval}"
     rounded: "{rounded.control}"
-    height: "56px"
+    height: "62px"
   button-text:
     backgroundColor: "transparent"
     textColor: "{colors.approval}"
     padding: "7px 0"
   input-field:
-    backgroundColor: "rgba(255, 255, 255, 0.38)"
+    backgroundColor: "rgba(255, 255, 255, 0.22)"
     textColor: "{colors.ink}"
     rounded: "{rounded.control}"
-    padding: "0 16px"
-    height: "54px"
+    padding: "0 18px"
+    height: "58px"
   authentication-frame:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.frame}"
+    rounded: "0px"
 ---
 
 # Design System: Afiliadoinator 3000
 
 ## Overview
 
-**Creative North Star: "Mesa de Curadoria"**
+**Creative North Star: "Passaporte de Inspeção"**
 
-O sistema apresenta curadoria de ofertas como trabalho editorial criterioso: papel quente, tinta escura e um painel verde que explica por que contexto importa. A experiência é calma e operacional. A narrativa orienta; o formulário continua sendo a tarefa principal.
+O sistema apresenta a curadoria como um dossiê físico aberto sobre uma mesa de trabalho: papéis empilhados, índice lateral, etiquetas de evidência e marcas de aprovação. A composição é deliberadamente rica e tátil, enquanto o formulário permanece central e imediatamente reconhecível.
 
-A materialidade vem de fibras raster sutis, variações tonais mínimas, linhas finas e uma única camada de profundidade. Newsreader dá voz à marca e às manchetes. Geist mantém controles, etapas e explicações diretos. A referência é uma publicação de curadoria contemporânea, não uma mesa cenográfica nem um arquivo burocrático.
+A materialidade vem da mesa grafite, fibras de papel, folhas kraft, clips, fita adesiva, selos e etiquetas ocres. Roboto Slab dá voz editorial à marca, aos títulos e às ações principais; Geist e Geist Mono mantêm explicações e metadados legíveis.
 
 **Key Characteristics:**
 
-- Papel quente com textura raster quase imperceptível.
-- Painel editorial verde como contraponto ao formulário em papel.
-- Hierarquia serena entre contexto, jornada e tarefa.
-- Ocre usado como detalhe único de identidade.
+- Mesa grafite com um dossiê de papel quente em três colunas.
+- Camadas físicas visíveis: kraft, clip, fita, textura e selo.
+- Formulário central ladeado por índice e processo.
+- Ocre usado em etiquetas de evidência e pequenos detalhes.
 - Serifado restrito à marca e aos títulos; Geist no restante.
 
 ## Colors
 
-Paleta contida de papel e grafite, com verde editorial funcional e um único contraponto ocre.
+Paleta de arquivo editorial: papel e grafite dominam, verde indica ação e aprovação, ocre identifica evidências.
 
 ### Primary
 
-- **Verde de Curadoria:** forma o painel narrativo e também confirma ação, foco, estado atual e mensagens positivas.
+- **Verde de Curadoria:** identifica ação, foco, rota ativa e aprovação.
 
 ### Secondary
 
-- **Ocre de Arquivo:** aparece somente como pequeno detalhe de identidade e estado, nunca como segunda cor de ação.
+- **Ocre de Arquivo:** colore etiquetas, fita e marcas documentais; nunca substitui a ação principal verde.
 
 ### Neutral
 
@@ -114,63 +114,63 @@ Paleta contida de papel e grafite, com verde editorial funcional e um único con
 
 ### Named Rules
 
-**The One Ochre Detail Rule.** Use ocre once per composition as identity punctuation, never as repeated tags or decoration.
+**The Evidence Tag Rule.** Use ocre for documentary tags and tape, never for primary actions or body text.
 
-**The Green Carries Context Rule.** Use green for the editorial panel, action, focus, selection, approval, and concise positive notes.
+**The Approval Green Rule.** Use green for action, focus, current navigation and approval marks.
 
 ## Typography
 
-**Display Font:** Newsreader, with serif fallback
+**Display Font:** Roboto Slab, with serif fallback
 
 **Body Font:** Geist, with sans-serif fallback
 **Label/Mono Font:** Geist Mono, with monospace fallback
 
-**Character:** Newsreader gives brand and editorial statements a humane authority. Geist makes forms, navigation, journey labels, and explanations practical and contemporary. Geist Mono gives the numbered journey a compact archival cadence.
+**Character:** Roboto Slab gives brand, headings, labels, and actions the robust low-contrast lettering of the approved comp. Geist keeps explanations practical; Geist Mono gives process metadata an archival cadence.
 
 ### Hierarchy
 
-- **Display:** Medium Newsreader for the editorial proposition; compact leading and tight tracking create a strong, measured silhouette.
-- **Headline:** Responsive Newsreader for authentication titles; balanced wrapping and compact leading preserve calm hierarchy.
+- **Display:** Bold Roboto Slab for the editorial proposition; compact leading and tight tracking create a strong, measured silhouette.
+- **Headline:** Responsive Roboto Slab for authentication titles; balanced wrapping and compact leading preserve calm hierarchy.
 - **Body:** Regular Geist for descriptions and explanatory copy, generally constrained near 38–48 characters.
 - **Label:** Strong Geist for form labels and controls; small uppercase with measured tracking is reserved for marketplace sources.
 
 ### Named Rules
 
-**The Two Voices Rule.** Use Newsreader only for brand and titles. Use Geist for every operational or explanatory element; use Geist Mono only for compact sequence numbers.
+**The Three Voices Rule.** Use Roboto Slab for identity and decisive form text, Geist for explanations, and Geist Mono for compact process metadata.
 
 ## Layout
 
-Desktop authentication uses one centered frame split into two areas: a green editorial panel on the left and a paper form panel on the right. The frame caps at 1180px. The left side carries brand, authentication navigation, the proposition “Ofertas boas têm contexto”, a three-step journey, and marketplace sources. The right side centers one form column capped at 560px.
+Desktop authentication uses one centered three-column dossier over the dark curator desk. A narrow paper index carries brand, routes, and seal; the dominant central sheet carries the form; the right paper rail explains Coleta, Histórico de preço, and Aprovação humana. The frame caps near 1200px while the form column caps at 560px.
 
-At 960px, both areas remain visible with reduced padding and a tighter proportion. At 760px and below, they stack into one full-height, borderless page. Mobile keeps brand, navigation, headline, and explanation in the green area, hides the journey and marketplace sources, then gives the paper form the remaining space.
+Below 860px, the process rail hides while index and form remain. Below 640px, the desk scenery and layered props disappear, the index becomes a compact header, and the form fills a single paper column.
 
-Spacing follows a quiet vertical rhythm: tight gaps inside labels, medium gaps between controls, and large pauses between headline, journey, and form. The page repeats the 512px raster fiber asset at low opacity over the paper background. Keep supporting context concise so it never delays authentication.
+Spacing follows a quiet vertical rhythm: tight gaps inside labels, medium gaps between controls, and large pauses between headline, process context, and form. The frame and central sheet repeat the 512px raster fiber asset at low opacity. Keep supporting context concise so it never delays authentication.
 
 ## Elevation & Depth
 
-The system is flat by default. Tonal contrast, the green/paper split, low-opacity raster fibers, and hairline borders establish structure. The complete authentication frame alone receives a broad ambient shadow on wide screens; the primary button gains a smaller green-tinted shadow only on hover. Mobile removes frame shadow and radius so both areas become the page.
+Depth is physical and explicit on desktop: a dark desk supports offset kraft and paper sheets, the main dossier casts a deep ambient shadow, and authored clips and tape sit above the surface. Inner controls remain comparatively flat so the physical frame does not reduce usability. Mobile removes the layered scenery and shadow.
 
 ### Shadow Vocabulary
 
-- **Frame Ambient** (`0 26px 80px rgba(37, 42, 45, 0.12)`): separates the complete authentication composition from the paper field on wide screens.
-- **Approval Hover** (`0 10px 26px rgba(36, 75, 60, 0.18)`): gives the primary action a restrained lift during hover.
-- **Focus Halo** (`0 0 0 3px rgba(49, 92, 76, 0.16)`): makes keyboard focus explicit on fields.
+- **Frame Ambient** (`0 28px 70px rgba(8, 15, 14, 0.38), 0 5px 12px rgba(8, 15, 14, 0.24)`): separates the complete authentication composition from the dark desk on wide screens.
+- **Approval Hover** (`0 9px 20px rgba(36, 75, 60, 0.24)`): gives the primary action a restrained lift during hover.
+- **Focus Halo** (`0 0 0 3px rgba(49, 92, 76, 0.17)`): makes keyboard focus explicit on fields.
 
 ### Named Rules
 
-**The One Lifted Surface Rule.** Only the complete authentication frame may float at rest; its two areas remain flat.
+**The Layered Dossier Rule.** Depth belongs to the paper stack and attached objects; controls remain flat until interaction.
 
 ## Shapes
 
-Controls use gently rounded 12px corners. The outer authentication frame uses a slightly larger 14px radius. Small inline actions use 8px corners. Borders stay one pixel and low contrast. Avoid pills, tags, tickets, seals, or decorative stamps.
+Controls use restrained 4px corners; the dossier sheets remain square with one-pixel ink borders. The active navigation item forms a pointed tag; process evidence uses clipped ochre tags with circular eyelets; the approval seal is the largest circle. Physical silhouettes are intentional on this surface.
 
 ## Components
 
 ### Primary Button
 
-Confident and singular; it closes the form without ornament.
+Confident and singular; it reads like an approval action printed into the dossier.
 
-- **Shape:** Gently rounded control with a fixed minimum height.
+- **Shape:** Nearly square paper control with a fixed minimum height.
 - **Color:** Curatorial green with warm off-white text.
 - **Hover / Focus:** Darkens, rises by one pixel, and gains a restrained green shadow; keyboard focus uses an external translucent halo.
 - **Disabled:** Keeps its shape and color family at reduced opacity with a wait cursor.
@@ -187,7 +187,7 @@ Quiet utility action used for session exit.
 
 Large, familiar field with precise state feedback.
 
-- **Shape:** One-pixel border, 12px radius, 54px height, and 16px horizontal padding.
+- **Shape:** One-pixel ink border, 4px radius, 58px height, and 18px horizontal padding.
 - **Color:** Translucent white over paper with dark ink text.
 - **Hover / Focus:** Border strengthens on hover; focus shifts border to green, brightens the field, and adds the focus halo.
 - **Error:** Border and helper text switch to exception red.
@@ -196,57 +196,57 @@ Large, familiar field with precise state feedback.
 
 Compact text control embedded at the right edge of password fields.
 
-- **Shape:** Transparent 8px action area inside the field.
+- **Shape:** Transparent text action with 10px horizontal padding inside the field.
 - **Color:** Curatorial green.
 - **State:** A subtle green tint appears on hover; keyboard focus uses an external outline.
 
 ### Authentication Navigation
 
-Two familiar links share the top of the editorial panel.
+Two familiar links form the vertical index on the left sheet.
 
-- **Style:** Compact Geist links in warm translucent white.
-- **Active:** Full warm-white text plus one thin ocre underline.
-- **Responsive:** Remains horizontal on desktop and mobile.
+- **Style:** Roboto Slab labels with circular marks.
+- **Active:** Warm-white text on a pointed green tag.
+- **Responsive:** Vertical on desktop; compact and horizontal on mobile.
 
 ### Brand Wordmark
 
 Quiet editorial identity with one controlled color detail.
 
-- **Typography:** Newsreader in warm white, compact and tightly tracked.
-- **Detail:** One short ocre rule below the stacked name; on mobile the name becomes inline while the rule stays singular.
-- **Behavior:** Plain link with a warm-white keyboard-focus outline.
+- **Typography:** Large stacked Roboto Slab in dark ink; the name becomes inline on mobile.
+- **Detail:** Shares the index with an authored approval seal and archival caption.
+- **Behavior:** Plain link with a green keyboard-focus outline.
 
 ### Authentication Frame
 
-One composition with two complementary areas.
+One material composition with three functional paper areas.
 
-- **Structure:** Green editorial panel beside a paper form panel on wide screens; stacked on mobile.
-- **Corner Style:** Restrained 14px radius on wide screens; square and borderless on mobile.
-- **Depth:** One ambient shadow for the full frame, never per area.
+- **Structure:** Index, central form sheet, and process rail over layered kraft and paper.
+- **Corner Style:** Square paper sheets; borderless on mobile.
+- **Depth:** Deep desk shadow, offset backing sheets, paperclip and tape.
 - **Motion:** One 520ms reveal using the expressive easing; disabled for reduced-motion users.
 
-### Editorial Journey
+### Process Rail
 
-Three real product steps: Descoberta, Evidência, and Decisão.
+Three real product steps: Coleta, Histórico de preço, and Aprovação humana.
 
-- **Structure:** Number, short label, and factual explanation separated by translucent hairlines.
-- **Color:** Warm-white hierarchy over the green panel.
-- **Responsive:** Hidden at 760px and below, together with marketplace sources, while headline and explanation remain visible.
+- **Structure:** Ochre tag with inline pictogram and eyelet, numbered label, and factual explanation connected by a green vertical rule.
+- **Color:** Dark ink on warm paper with ochre evidence tags.
+- **Responsive:** Hidden below 860px so the form remains usable.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** keep the form as the primary task and the green panel as concise orientation.
-- **Do** use warm paper, dark ink, curatorial green, and one ocre detail as the complete palette hierarchy.
-- **Do** describe the product through the implemented journey: descoberta, evidência, and decisão.
+- **Do** preserve the three-column passport composition and the dark curator desk on desktop.
+- **Do** use warm paper, dark ink, approval green, and ocre evidence tags as the palette hierarchy.
+- **Do** keep clips, tape, seals and stacked sheets subordinate to the functional form.
 - **Do** keep keyboard focus visible and disable nonessential motion for reduced-motion users.
-- **Do** retain the editorial headline on mobile while hiding deeper supporting detail.
+- **Do** flatten the physical scene on mobile so authentication remains usable.
 
 ### Don't:
 
-- **Don't** restore the former three-column authentication layout or a separate evidence rail.
-- **Don't** add approval seals, badges, ornamental stamps, or repeated tags.
-- **Don't** use Newsreader for form controls, body copy, journey details, or navigation.
-- **Don't** invent marketplace claims beyond the listed sources and implemented product flow.
+- **Don't** simplify the desktop surface back into a generic split-screen or empty card.
+- **Don't** remove the process rail, evidence tags, seal, clip, tape or layered paper from desktop.
+- **Don't** use the slab face for explanatory paragraphs or dense metadata.
+- **Don't** invent marketplace claims, metrics or testimonials.
 - **Don't** add shadows to individual areas or controls at rest.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-21T23:39:49Z",
+  "generatedAt": "2026-09-22T00:20:00Z",
   "title": "Design System: Afiliadoinator 3000",
   "extensions": {
     "colorMeta": {
@@ -8,182 +8,184 @@
         "role": "neutral",
         "displayName": "Papel Quente",
         "canonical": "#f3f0e8",
-        "tonalRamp": ["oklch(15% 0.014 91)", "oklch(27% 0.014 91)", "oklch(39% 0.014 91)", "oklch(51% 0.014 91)", "oklch(63% 0.014 91)", "oklch(75% 0.014 91)", "oklch(87% 0.014 91)", "oklch(95% 0.014 91)"]
+        "tonalRamp": ["#29261f", "#474239", "#655f53", "#837c6d", "#a49c8b", "#c6bead", "#e3ddcf", "#f3f0e8"]
       },
       "paper-deep": {
         "role": "neutral",
         "displayName": "Papel Profundo",
         "canonical": "#eae5d9",
-        "tonalRamp": ["oklch(15% 0.018 91)", "oklch(27% 0.018 91)", "oklch(39% 0.018 91)", "oklch(51% 0.018 91)", "oklch(63% 0.018 91)", "oklch(75% 0.018 91)", "oklch(87% 0.018 91)", "oklch(95% 0.018 91)"]
+        "tonalRamp": ["#27241e", "#454038", "#625c51", "#80796b", "#9f9889", "#beb7a8", "#dad4c7", "#eae5d9"]
       },
       "ink": {
         "role": "neutral",
         "displayName": "Tinta de Inspeção",
         "canonical": "#252a2d",
-        "tonalRamp": ["oklch(15% 0.012 230)", "oklch(27% 0.012 230)", "oklch(39% 0.012 230)", "oklch(51% 0.012 230)", "oklch(63% 0.012 230)", "oklch(75% 0.012 230)", "oklch(87% 0.012 230)", "oklch(95% 0.012 230)"]
-      },
-      "ink-muted": {
-        "role": "neutral",
-        "displayName": "Tinta Atenuada",
-        "canonical": "#555954",
-        "tonalRamp": ["oklch(15% 0.01 140)", "oklch(27% 0.01 140)", "oklch(39% 0.01 140)", "oklch(51% 0.01 140)", "oklch(63% 0.01 140)", "oklch(75% 0.01 140)", "oklch(87% 0.01 140)", "oklch(95% 0.01 140)"]
-      },
-      "ink-soft": {
-        "role": "neutral",
-        "displayName": "Tinta Suave",
-        "canonical": "#575a55",
-        "tonalRamp": ["oklch(15% 0.01 130)", "oklch(27% 0.01 130)", "oklch(39% 0.01 130)", "oklch(51% 0.01 130)", "oklch(63% 0.01 130)", "oklch(75% 0.01 130)", "oklch(87% 0.01 130)", "oklch(95% 0.01 130)"]
+        "tonalRamp": ["#15181a", "#252a2d", "#3d4448", "#596164", "#777f81", "#989fa0", "#bbc0c0", "#e5e7e6"]
       },
       "approval": {
-        "role": "tertiary",
+        "role": "primary",
         "displayName": "Verde de Aprovação",
         "canonical": "#315c4c",
-        "tonalRamp": ["oklch(15% 0.065 164)", "oklch(27% 0.065 164)", "oklch(39% 0.065 164)", "oklch(51% 0.065 164)", "oklch(63% 0.065 164)", "oklch(75% 0.065 164)", "oklch(87% 0.065 164)", "oklch(95% 0.065 164)"]
+        "tonalRamp": ["#10261f", "#1d3c31", "#315c4c", "#4f7768", "#719487", "#96b1a6", "#bed0c9", "#e8f0ed"]
       },
       "ochre-detail": {
         "role": "secondary",
         "displayName": "Ocre de Arquivo",
         "canonical": "#d6a740",
-        "tonalRamp": ["oklch(15% 0.12 85)", "oklch(27% 0.12 85)", "oklch(39% 0.12 85)", "oklch(51% 0.12 85)", "oklch(63% 0.12 85)", "oklch(75% 0.12 85)", "oklch(87% 0.12 85)", "oklch(95% 0.12 85)"]
+        "tonalRamp": ["#2d2109", "#513b10", "#77591b", "#9b7728", "#bd9635", "#d6a740", "#e8c979", "#f7ebca"]
       },
       "danger": {
         "role": "primary",
         "displayName": "Vermelho de Exceção",
         "canonical": "#9e3732",
-        "tonalRamp": ["oklch(15% 0.12 27)", "oklch(27% 0.12 27)", "oklch(39% 0.12 27)", "oklch(51% 0.12 27)", "oklch(63% 0.12 27)", "oklch(75% 0.12 27)", "oklch(87% 0.12 27)", "oklch(95% 0.12 27)"]
-      },
-      "line": {
-        "role": "neutral",
-        "displayName": "Linha",
-        "canonical": "rgba(37, 42, 45, 0.14)",
-        "tonalRamp": ["oklch(15% 0.012 230 / 0.14)", "oklch(27% 0.012 230 / 0.14)", "oklch(39% 0.012 230 / 0.14)", "oklch(51% 0.012 230 / 0.14)", "oklch(63% 0.012 230 / 0.14)", "oklch(75% 0.012 230 / 0.14)", "oklch(87% 0.012 230 / 0.14)", "oklch(95% 0.012 230 / 0.14)"]
-      },
-      "line-strong": {
-        "role": "neutral",
-        "displayName": "Linha Forte",
-        "canonical": "rgba(37, 42, 45, 0.28)",
-        "tonalRamp": ["oklch(15% 0.012 230 / 0.28)", "oklch(27% 0.012 230 / 0.28)", "oklch(39% 0.012 230 / 0.28)", "oklch(51% 0.012 230 / 0.28)", "oklch(63% 0.012 230 / 0.28)", "oklch(75% 0.012 230 / 0.28)", "oklch(87% 0.012 230 / 0.28)", "oklch(95% 0.012 230 / 0.28)"]
+        "tonalRamp": ["#2d1110", "#511b19", "#762723", "#9e3732", "#bc5a54", "#d5827d", "#e9b0ac", "#f8e4e2"]
       },
       "on-approval": {
         "role": "neutral",
         "displayName": "Marfim de Ação",
         "canonical": "#f8f4e9",
-        "tonalRamp": ["oklch(15% 0.015 91)", "oklch(27% 0.015 91)", "oklch(39% 0.015 91)", "oklch(51% 0.015 91)", "oklch(63% 0.015 91)", "oklch(75% 0.015 91)", "oklch(87% 0.015 91)", "oklch(95% 0.015 91)"]
+        "tonalRamp": ["#29261f", "#484239", "#675f52", "#867d6d", "#a79c8a", "#c9bdab", "#e6ded0", "#f8f4e9"]
       }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display Newsreader", "purpose": "Protected-area welcome statement." },
-      "headline": { "displayName": "Headline Newsreader", "purpose": "Authentication titles." },
-      "body": { "displayName": "Body", "purpose": "Descriptions and explanatory copy." },
-      "label": { "displayName": "Label", "purpose": "Form labels, controls, journey headings, and metadata." }
+      "display": {
+        "displayName": "Roboto Slab Display",
+        "purpose": "Marca, títulos e ações decisivas na autenticação."
+      },
+      "headline": {
+        "displayName": "Roboto Slab Headline",
+        "purpose": "Título principal do formulário."
+      },
+      "body": {
+        "displayName": "Geist Body",
+        "purpose": "Descrições e ajuda funcional."
+      },
+      "label": {
+        "displayName": "Geist Mono Metadata",
+        "purpose": "Metadados e etapas do processo."
+      }
     },
     "shadows": [
-      { "name": "dossier-ambient", "value": "0 26px 80px rgba(37, 42, 45, 0.12)", "purpose": "Separate the complete authentication frame from the paper field on wide screens." },
-      { "name": "approval-hover", "value": "0 10px 26px rgba(36, 75, 60, 0.18)", "purpose": "Give the primary action a restrained hover lift." },
-      { "name": "focus-halo", "value": "0 0 0 3px rgba(49, 92, 76, 0.16)", "purpose": "Make keyboard focus explicit on form fields." }
+      {
+        "name": "desk-dossier",
+        "value": "0 28px 70px rgba(8, 15, 14, 0.38), 0 5px 12px rgba(8, 15, 14, 0.24)",
+        "purpose": "Separar o dossiê e suas folhas sobrepostas da mesa grafite."
+      },
+      {
+        "name": "approval-hover",
+        "value": "0 9px 20px rgba(36, 75, 60, 0.24)",
+        "purpose": "Elevar discretamente a ação principal no hover."
+      }
     ],
     "motion": [
-      { "name": "state-fast", "value": "180ms ease", "purpose": "Color and shadow transitions on controls." },
-      { "name": "expressive-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Dossier reveal, active navigation rule, and primary-button lift." },
-      { "name": "dossier-reveal", "value": "520ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Single entrance motion for the authentication frame; disabled under reduced motion." }
+      {
+        "name": "state-fast",
+        "value": "180ms ease",
+        "purpose": "Estados de campo e botão."
+      },
+      {
+        "name": "dossier-reveal",
+        "value": "520ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Entrada única do dossiê; desabilitada com reduced motion."
+      }
     ],
     "breakpoints": [
-      { "name": "auth-stacked", "value": "760px" },
-      { "name": "auth-tight", "value": "960px" }
+      {
+        "name": "process-hidden",
+        "value": "860px"
+      },
+      {
+        "name": "mobile-sheet",
+        "value": "640px"
+      },
+      {
+        "name": "mobile-header-stacked",
+        "value": "420px"
+      }
     ]
   },
   "components": [
     {
-      "name": "Primary Button",
+      "name": "Primary Approval Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Confident, singular form submission action.",
-      "html": "<button class=\"ds-button-primary\" type=\"button\">Entrar</button>",
-      "css": ".ds-button-primary { min-height: 56px; padding: 0 24px; border: 0; border-radius: 12px; background: var(--approval); color: #f8f4e9; font-family: var(--font-geist-sans), sans-serif; font-size: .95rem; font-weight: 760; cursor: pointer; transition: background-color 180ms ease, transform 180ms cubic-bezier(.16,1,.3,1), box-shadow 180ms ease; } .ds-button-primary:hover { background: #244b3c; box-shadow: 0 10px 26px rgba(36,75,60,.18); transform: translateY(-1px); } .ds-button-primary:active { transform: translateY(0); } .ds-button-primary:focus-visible { outline: 3px solid rgba(49,92,76,.3); outline-offset: 3px; }"
+      "description": "Ação principal verde com lettering slab.",
+      "html": "<button class=\"ds-approval-button\" type=\"button\">Continuar →</button>",
+      "css": ".ds-approval-button { min-height: 62px; padding: 0 24px; border: 0; border-radius: 4px; background: var(--approval); color: #f8f4e9; font-family: var(--font-slab), serif; font-size: 1.12rem; font-weight: 700; cursor: pointer; } .ds-approval-button:hover { box-shadow: 0 9px 20px rgba(36,75,60,.24); transform: translateY(-2px); } .ds-approval-button:focus-visible { outline: 3px solid rgba(49,92,76,.32); outline-offset: 3px; }"
     },
     {
-      "name": "Text Button",
-      "kind": "button",
-      "refersTo": "button-text",
-      "description": "Quiet utility action for session exit.",
-      "html": "<button class=\"ds-button-text\" type=\"button\">Sair</button>",
-      "css": ".ds-button-text { padding: 7px 0; border: 0; background: transparent; color: var(--approval); font-family: var(--font-geist-sans), sans-serif; font-weight: 720; cursor: pointer; } .ds-button-text:hover { text-decoration: underline; text-underline-offset: 4px; } .ds-button-text:focus-visible { outline: 3px solid rgba(49,92,76,.24); outline-offset: 3px; }"
-    },
-    {
-      "name": "Input Field",
+      "name": "Icon Input Field",
       "kind": "input",
       "refersTo": "input-field",
-      "description": "Large familiar field with precise hover, focus, and error feedback.",
-      "html": "<label class=\"ds-field\"><span>E-mail</span><input type=\"email\" placeholder=\"voce@exemplo.com\"></label>",
-      "css": ".ds-field { display: grid; gap: 9px; color: var(--ink); font-family: var(--font-geist-sans), sans-serif; font-size: .84rem; font-weight: 720; } .ds-field input { width: 100%; height: 54px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: 12px; outline: none; background: rgba(255,255,255,.38); color: var(--ink); font: inherit; font-weight: 400; transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease; } .ds-field input:hover { border-color: #83847c; } .ds-field input:focus-visible { border-color: var(--approval); background: rgba(255,255,255,.64); box-shadow: 0 0 0 3px rgba(49,92,76,.16); }"
+      "description": "Campo de papel com ícone documental e divisória interna.",
+      "html": "<label class=\"ds-field\"><span>E-mail</span><span class=\"ds-field-control\"><span aria-hidden=\"true\">✉</span><input type=\"email\" placeholder=\"seu@email.com\"></span></label>",
+      "css": ".ds-field { display: grid; gap: 8px; color: var(--ink); font-family: var(--font-slab), serif; font-weight: 700; } .ds-field-control { position: relative; display: grid; grid-template-columns: 48px 1fr; height: 58px; border: 1px solid rgba(37,42,45,.52); border-radius: 4px; background: rgba(255,255,255,.22); } .ds-field-control > span { display: grid; place-items: center; border-right: 1px solid rgba(37,42,45,.18); } .ds-field input { min-width: 0; border: 0; background: transparent; padding: 0 18px; color: var(--ink); } .ds-field-control:focus-within { outline: 3px solid rgba(49,92,76,.17); }"
     },
     {
-      "name": "Authentication Navigation",
+      "name": "Authentication Index",
       "kind": "nav",
-      "description": "Two familiar links in the editorial header with an ocre active rule.",
-      "html": "<nav class=\"ds-auth-nav\"><a class=\"ds-auth-current\" href=\"#\">Entrar</a><a href=\"#\">Criar conta</a></nav>",
-      "css": ".ds-auth-nav { display: flex; gap: 20px; font-family: var(--font-geist-sans), sans-serif; } .ds-auth-nav a { position: relative; padding: 6px 0 9px; color: rgba(248,244,233,.8); font-size: .82rem; font-weight: 650; text-decoration: none; } .ds-auth-nav a:focus-visible { outline: 3px solid rgba(248,244,233,.82); outline-offset: 4px; } .ds-auth-nav .ds-auth-current { color: var(--paper); } .ds-auth-nav .ds-auth-current::after { content: ''; position: absolute; right: 0; bottom: 8px; left: 0; height: 1px; background: var(--tag); }"
+      "description": "Índice vertical de autenticação com rota atual em etiqueta apontada.",
+      "html": "<nav class=\"ds-auth-index\"><a class=\"ds-current\" href=\"#\">Entrar</a><a href=\"#\">Criar conta</a></nav>",
+      "css": ".ds-auth-index { display: grid; gap: 8px; font-family: var(--font-slab), serif; } .ds-auth-index a { min-height: 66px; display: flex; align-items: center; padding: 0 17px; color: #3c4542; text-decoration: none; } .ds-auth-index .ds-current { margin-right: -28px; padding-right: 36px; background: var(--approval); color: #f8f4e9; clip-path: polygon(0 0,calc(100% - 22px) 0,100% 50%,calc(100% - 22px) 100%,0 100%); } .ds-auth-index a:focus-visible { outline: 3px solid rgba(49,92,76,.3); outline-offset: 3px; }"
     },
     {
-      "name": "Brand Wordmark",
+      "name": "Slab Wordmark",
       "kind": "custom",
-      "description": "Warm-white Newsreader wordmark with one controlled ocre detail.",
+      "description": "Marca empilhada em slab robusta no índice de papel.",
       "html": "<a class=\"ds-wordmark\" href=\"#\">Afiliadoinator <span>3000</span></a>",
-      "css": ".ds-wordmark { position: relative; display: inline-block; color: var(--paper); font-family: var(--font-newsreader), serif; font-size: 1rem; font-weight: 780; letter-spacing: -.03em; line-height: 1.15; text-decoration: none; } .ds-wordmark span { display: block; } .ds-wordmark::after { display: block; width: 22px; height: 2px; margin-top: 10px; background: var(--tag); content: ''; } .ds-wordmark:focus-visible { outline: 3px solid rgba(248,244,233,.82); outline-offset: 4px; }"
+      "css": ".ds-wordmark { color: var(--ink); font-family: var(--font-slab), serif; font-size: 2rem; font-weight: 700; letter-spacing: -.035em; line-height: .98; text-decoration: none; } .ds-wordmark span { display: block; } .ds-wordmark:focus-visible { outline: 3px solid rgba(49,92,76,.3); outline-offset: 3px; }"
     },
     {
-      "name": "Authentication Frame",
+      "name": "Three-Column Dossier",
       "kind": "card",
       "refersTo": "authentication-frame",
-      "description": "Two-area organizing surface for product context and authentication.",
-      "html": "<section class=\"ds-auth-frame\"><aside>Contexto editorial</aside><main>Formulário</main></section>",
-      "css": ".ds-auth-frame { display: grid; grid-template-columns: minmax(360px,.9fr) minmax(480px,1.1fr); overflow: hidden; border: 1px solid var(--line-strong); border-radius: 14px; background: var(--paper); color: var(--ink); box-shadow: 0 26px 80px rgba(37,42,45,.12); font-family: var(--font-geist-sans), sans-serif; } .ds-auth-frame > aside { padding: clamp(32px,4vw,52px); background: var(--approval); color: var(--paper); } .ds-auth-frame > main { padding: clamp(48px,6vw,82px) clamp(40px,6vw,84px); background: var(--paper); }"
+      "description": "Índice, formulário e processo sobre folhas kraft e papel.",
+      "html": "<section class=\"ds-dossier\"><aside>Índice</aside><main>Formulário</main><aside>Processo</aside></section>",
+      "css": ".ds-dossier { display: grid; grid-template-columns: minmax(180px,.62fr) minmax(440px,1.65fr) minmax(240px,.78fr); min-height: 760px; border: 1px solid rgba(54,50,40,.48); border-radius: 0; background: var(--paper); color: var(--ink); box-shadow: 0 28px 70px rgba(8,15,14,.38),0 5px 12px rgba(8,15,14,.24); } .ds-dossier > * + * { border-left: 1px solid rgba(50,48,42,.2); }"
     },
     {
-      "name": "Editorial Journey",
+      "name": "Process Evidence Tag",
       "kind": "custom",
-      "description": "Three factual product steps that add useful context without competing with the form.",
-      "html": "<ol class=\"ds-journey\"><li><span>01</span><div><strong>Descoberta</strong><p>Busca unificada entre marketplaces.</p></div></li><li><span>02</span><div><strong>Evidência</strong><p>Histórico de preço, marca e qualidade.</p></div></li><li><span>03</span><div><strong>Decisão</strong><p>Ranking assistido e aprovação humana.</p></div></li></ol>",
-      "css": ".ds-journey { margin: 0; padding: 0; background: var(--approval); color: var(--paper); font-family: var(--font-geist-sans), sans-serif; list-style: none; } .ds-journey li { display: grid; grid-template-columns: 36px 1fr; gap: 14px; padding: 17px 0; border-top: 1px solid rgba(248,244,233,.18); } .ds-journey li:last-child { border-bottom: 1px solid rgba(248,244,233,.18); } .ds-journey li > span { color: rgba(248,244,233,.9); font-family: var(--font-geist-mono), monospace; font-size: .72rem; } .ds-journey strong { font-size: .82rem; } .ds-journey p { margin: 5px 0 0; color: rgba(248,244,233,.78); font-size: .76rem; line-height: 1.5; }"
-    },
-    {
-      "name": "Password Reveal",
-      "kind": "button",
-      "description": "Compact text action embedded in password fields.",
-      "html": "<span class=\"ds-password\"><input type=\"password\" value=\"senha123\" aria-label=\"Senha\"><button type=\"button\">Mostrar</button></span>",
-      "css": ".ds-password { position: relative; display: block; } .ds-password input { width: 100%; height: 54px; padding: 0 84px 0 16px; border: 1px solid var(--line-strong); border-radius: 12px; background: rgba(255,255,255,.38); color: var(--ink); } .ds-password button { position: absolute; top: 50%; right: 9px; min-height: 36px; padding: 0 9px; border: 0; border-radius: 8px; background: transparent; color: var(--approval); font-family: var(--font-geist-sans), sans-serif; font-size: .76rem; font-weight: 700; transform: translateY(-50%); } .ds-password button:hover { background: rgba(49,92,76,.08); } .ds-password button:focus-visible { outline: 3px solid rgba(49,92,76,.24); outline-offset: 3px; }"
+      "description": "Etiqueta ocre com ilhó, pictograma documental e fita.",
+      "html": "<div class=\"ds-process-tag\"><span class=\"ds-eyelet\"></span><svg viewBox=\"0 0 32 32\" aria-hidden=\"true\"><circle cx=\"16\" cy=\"16\" r=\"11\"/><path d=\"M5 16h22\"/></svg></div>",
+      "css": ".ds-process-tag { position: relative; display: grid; place-items: center; width: 105px; height: 48px; background: var(--tag); clip-path: polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%); filter: drop-shadow(2px 4px 4px rgba(64,51,26,.16)); } .ds-eyelet { position: absolute; left: 9px; width: 14px; height: 14px; border: 3px solid #46483f; border-radius: 50%; background: var(--paper-deep); } .ds-process-tag svg { width: 30px; height: 30px; margin-left: 14px; fill: none; stroke: #343a36; stroke-width: 2.3; }"
     }
   ],
   "narrative": {
-    "northStar": "Mesa de Curadoria",
-    "overview": "O sistema apresenta curadoria de ofertas como trabalho editorial criterioso: papel quente, tinta escura e um painel verde que explica por que contexto importa. A experiência é calma e operacional. A narrativa orienta; o formulário continua sendo a tarefa principal.\n\nA materialidade vem de fibras raster sutis, variações tonais mínimas, linhas finas e uma única camada de profundidade. Newsreader dá voz à marca e às manchetes. Geist mantém controles, etapas e explicações diretos. A referência é uma publicação de curadoria contemporânea, não uma mesa cenográfica nem um arquivo burocrático.",
+    "northStar": "Passaporte de Inspeção",
+    "overview": "O sistema apresenta a curadoria como um dossiê físico aberto sobre uma mesa de trabalho: papéis empilhados, índice lateral, etiquetas de evidência e marcas de aprovação. A composição é deliberadamente rica e tátil, enquanto o formulário permanece central e imediatamente reconhecível.\n\nA materialidade vem da mesa grafite, fibras de papel, folhas kraft, clips, fita adesiva, selos e etiquetas ocres. Roboto Slab dá voz editorial à marca, aos títulos e às ações principais; Geist e Geist Mono mantêm explicações e metadados legíveis.",
     "keyCharacteristics": [
-      "Papel quente com textura raster de fibras quase imperceptível.",
-      "Painel editorial verde como contraponto ao formulário em papel.",
-      "Hierarquia serena entre contexto, jornada e tarefa.",
-      "Ocre usado como detalhe único de identidade.",
-      "Serifado restrito à marca e aos títulos; Geist no restante."
+      "Mesa grafite com um dossiê de papel quente em três colunas.",
+      "Camadas físicas visíveis: kraft, clip, fita, textura e selo.",
+      "Formulário central ladeado por índice e processo.",
+      "Ocre usado em etiquetas de evidência e pequenos detalhes."
     ],
     "rules": [
-      { "name": "The One Ochre Detail Rule", "body": "Use ocre once per composition as identity punctuation, never as repeated tags or decoration.", "section": "colors" },
-      { "name": "The Green Carries Context Rule", "body": "Use green for the editorial panel, action, focus, selection, approval, and concise positive notes.", "section": "colors" },
-      { "name": "The Two Voices Rule", "body": "Use Newsreader only for brand and titles. Use Geist for every operational or explanatory element; use Geist Mono only for compact sequence numbers.", "section": "typography" },
-      { "name": "The One Lifted Surface Rule", "body": "Only the complete authentication frame may float at rest; its two areas remain flat.", "section": "elevation" }
+      {
+        "name": "The Evidence Tag Rule",
+        "body": "Use ocre for documentary tags and tape, never for primary actions or body text.",
+        "section": "colors"
+      },
+      {
+        "name": "The Approval Green Rule",
+        "body": "Use green for action, focus, current navigation and approval marks.",
+        "section": "colors"
+      },
+      {
+        "name": "The Layered Dossier Rule",
+        "body": "Depth belongs to the paper stack and attached objects; controls remain flat until interaction.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do keep the form as the primary task and the green panel as concise orientation.",
-      "Do use warm paper, dark ink, approval green, and one ocre detail as the complete palette hierarchy.",
-      "Do describe the product through the implemented journey: descoberta, evidência, and decisão.",
-      "Do keep keyboard focus visible and disable nonessential motion for reduced-motion users.",
-      "Do retain the editorial headline on mobile while hiding deeper supporting detail."
+      "Do preserve the three-column passport composition and the dark curator desk on desktop.",
+      "Do keep clips, tape, seals and stacked sheets subordinate to the functional form.",
+      "Do flatten the physical scene on mobile so authentication remains usable."
     ],
     "donts": [
-      "Don't literalize a desk scene with photos, loose stationery, maps, clips, or props.",
-      "Don't restore the former three-column authentication layout or a separate evidence rail.",
-      "Don't add approval seals, badges, ornamental stamps, or repeated tags.",
-      "Don't use Newsreader for form controls, body copy, journey details, or navigation.",
-      "Don't invent marketplace claims beyond the listed sources and implemented product flow.",
-      "Don't add shadows to individual areas or controls at rest."
+      "Don't simplify the desktop surface back into a generic split-screen or empty card.",
+      "Don't remove the process rail, evidence tags, seal, clip, tape or layered paper from desktop.",
+      "Don't invent marketplace claims, metrics or testimonials."
     ]
   }
 }

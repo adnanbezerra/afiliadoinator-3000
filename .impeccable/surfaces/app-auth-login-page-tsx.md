@@ -9,19 +9,18 @@ related_targets: ["app/(auth)/cadastro/page.tsx"]
 
 - Scope: `/login` and `/cadastro`; Operate mode. Public authentication surfaces that unlock the protected application for any successfully registered user.
 - Job: create an account or resume a session with minimum cognitive load; show validation, duplicate-email, invalid-credential, loading, and connection-error states.
-- Direction: Mesa de Curadoria. A green editorial panel explains “Ofertas boas têm contexto” and the real product journey; a paper panel keeps the authentication form dominant and direct.
-- Constraints: PT-BR, accessible keyboard flow, responsive stacked mobile layout, existing JSON auth endpoints, session in `httpOnly` cookie, no social login, no password recovery claim, no integration settings.
+- Direction: Passaporte de Inspeção, implemented faithfully from the approved second comp. The dark curator desk, layered papers, clips, tape, seals, ochre tags, left index, central form, and right process rail are intentional parts of the composition.
+- Constraints: PT-BR, accessible keyboard flow, responsive mobile adaptation, existing JSON auth endpoints, session in `httpOnly` cookie, no social login, no password recovery claim, no integration settings.
 
 ## Fidelity inventory
 
 | Visible ingredient | Commitment | Medium |
 | --- | --- | --- |
-| Product identity | Warm-white Newsreader wordmark with one short ocre rule | Semantic HTML/CSS |
-| Authentication navigation | Entrar and Criar conta share the editorial header; current state uses an ocre underline | Semantic HTML/CSS |
-| Editorial proposition | “Ofertas boas têm contexto” plus one concise explanation remains visible at every width | Semantic HTML/CSS |
-| Product journey | Descoberta, Evidência, and Decisão use numbered rows with factual descriptions | Semantic HTML/CSS |
-| Marketplace sources | The planned ecosystem—Amazon Brasil, Mercado Livre, Shopee, and AliExpress—appears as restrained uppercase copy | Semantic HTML/CSS |
-| Form panel | Paper surface with generous whitespace, strong labels, large controls, password reveal, and inline feedback | Semantic HTML/CSS |
-| Paper material | Warm paper field with extremely subtle fiber; no desk scenery | CSS background texture |
-| Responsive behavior | At 760px, areas stack; headline and explanation remain, while journey and sources hide to prioritize the form | CSS media queries |
-| Motion | One frame reveal and one active-link rule reveal; reduced-motion disables both | CSS animation |
+| Curator desk | Original approved comp is reused as the desktop backdrop so its notebooks, photos, maps, clips, and dark surface remain exact | Raster background asset |
+| Product identity | Large Roboto Slab wordmark in the left paper index | Semantic HTML/CSS |
+| Authentication index | Entrar and Criar conta form a vertical index; the active route becomes a green pointed tag | Semantic HTML/CSS |
+| Form dossier | Dominant central paper sheet with Roboto Slab heading, icon-led square controls, password reveal, error states, and primary/alternate actions | Semantic HTML/CSS |
+| Process rail | Coleta, Histórico de preço, and Aprovação humana follow a vertical line with ochre tags, pictograms, and eyelets | Semantic HTML/CSS |
+| Paper material | Warm fiber texture, kraft backing sheets, tape, paperclip, and approval seal | Raster texture and authored CSS |
+| Responsive behavior | Process rail hides on tablets; mobile flattens the dossier and turns the index into a compact header | CSS media queries |
+| Motion | One restrained dossier reveal; reduced-motion disables it | CSS animation |

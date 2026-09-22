@@ -10,8 +10,8 @@ export default function RegisterPage() {
   return (
     <AuthShell
       mode="register"
-      title="Crie sua conta."
-      description="Cadastre-se para acessar sua mesa de curadoria."
+      title="Crie sua conta"
+      description="Cadastre-se para acessar sua Mesa de Curadoria com segurança e contexto."
     >
       <AuthForm mode="register" />
     </AuthShell>

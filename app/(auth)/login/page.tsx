@@ -10,8 +10,8 @@ export default function LoginPage() {
   return (
     <AuthShell
       mode="login"
-      title="Bem-vindo de volta."
-      description="Entre para continuar sua curadoria de ofertas."
+      title="Afiliadoinator 3000"
+      description="Entre para acessar sua Mesa de Curadoria e encontrar as melhores ofertas, com mais segurança e contexto."
     >
       <AuthForm mode="login" />
     </AuthShell>

@@ -17,6 +17,32 @@ interface ErrorPayload {
   fields?: Partial<Record<FieldName, string[]>>;
 }
 
+function FieldIcon({ type }: { type: FieldName }) {
+  if (type === "email") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 6.5h18v11H3zM3.8 7.3 12 13l8.2-5.7" />
+      </svg>
+    );
+  }
+
+  if (type === "password") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="5" y="10" width="14" height="11" rx="1" />
+        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="7" r="4" />
+      <path d="M4 21c.8-5 3.5-7.5 8-7.5s7.2 2.5 8 7.5" />
+    </svg>
+  );
+}
+
 const genericErrors: Record<string, string> = {
   "Email already registered": "Este e-mail já está cadastrado.",
   "Invalid email or password": "E-mail ou senha incorretos.",
@@ -124,17 +150,20 @@ export function AuthForm({ mode }: AuthFormProps) {
       {isRegister ? (
         <label className={styles.field}>
           <span>Nome</span>
-          <input
-            name="name"
-            type="text"
-            autoComplete="name"
-            minLength={2}
-            maxLength={120}
-            required
-            aria-invalid={Boolean(fieldErrors.name)}
-            aria-describedby={fieldErrors.name ? "name-error" : undefined}
-            placeholder="Como devemos chamar você?"
-          />
+          <span className={styles.inputControl}>
+            <span className={styles.fieldIcon}><FieldIcon type="name" /></span>
+            <input
+              name="name"
+              type="text"
+              autoComplete="name"
+              minLength={2}
+              maxLength={120}
+              required
+              aria-invalid={Boolean(fieldErrors.name)}
+              aria-describedby={fieldErrors.name ? "name-error" : undefined}
+              placeholder="Como devemos chamar você?"
+            />
+          </span>
           {fieldErrors.name && (
             <small id="name-error">{fieldErrors.name}</small>
           )}
@@ -143,17 +172,20 @@ export function AuthForm({ mode }: AuthFormProps) {
 
       <label className={styles.field}>
         <span>E-mail</span>
-        <input
-          name="email"
-          type="email"
-          inputMode="email"
-          autoComplete="email"
-          maxLength={254}
-          required
-          aria-invalid={Boolean(fieldErrors.email)}
-          aria-describedby={fieldErrors.email ? "email-error" : undefined}
-          placeholder="voce@exemplo.com"
-        />
+        <span className={styles.inputControl}>
+          <span className={styles.fieldIcon}><FieldIcon type="email" /></span>
+          <input
+            name="email"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            maxLength={254}
+            required
+            aria-invalid={Boolean(fieldErrors.email)}
+            aria-describedby={fieldErrors.email ? "email-error" : undefined}
+            placeholder="seu@email.com"
+          />
+        </span>
         {fieldErrors.email && (
           <small id="email-error">{fieldErrors.email}</small>
         )}
@@ -162,6 +194,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       <label className={styles.field}>
         <span>Senha</span>
         <span className={styles.passwordControl}>
+          <span className={styles.fieldIcon}><FieldIcon type="password" /></span>
           <input
             name="password"
             type={showPassword ? "text" : "password"}
@@ -212,8 +245,8 @@ export function AuthForm({ mode }: AuthFormProps) {
             ? "Criando conta…"
             : "Entrando…"
           : isRegister
-            ? "Criar conta e acessar"
-            : "Entrar"}
+            ? "Criar conta e acessar →"
+            : "Continuar →"}
       </button>
 
       <p className={styles.alternate}>

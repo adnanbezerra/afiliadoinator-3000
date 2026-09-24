@@ -4,10 +4,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { toast } from "@/components/ui/toast";
+import {
+  PASSWORD_MIN_LENGTH,
+  PASSWORD_PATTERNS,
+} from "@/src/modules/identity/application/shared/password-policy";
 import styles from "./auth.module.css";
 
 type AuthMode = "login" | "register";
-type FieldName = "name" | "email" | "password";
+type FieldName = "name" | "email" | "password" | "confirmPassword";
+type ServerFieldName = Exclude<FieldName, "confirmPassword">;
 
 interface AuthFormProps {
   mode: AuthMode;
@@ -15,10 +20,34 @@ interface AuthFormProps {
 
 interface ErrorPayload {
   error?: string;
-  fields?: Partial<Record<FieldName, string[]>>;
+  fields?: Partial<Record<ServerFieldName, string[]>>;
 }
 
-function FieldIcon({ type }: { type: FieldName }) {
+const passwordRequirements = [
+  {
+    label: "8 caracteres",
+    isMet: (password: string) => password.length >= PASSWORD_MIN_LENGTH,
+  },
+  {
+    label: "Uma letra maiúscula",
+    isMet: (password: string) => PASSWORD_PATTERNS.uppercase.test(password),
+  },
+  {
+    label: "Uma letra minúscula",
+    isMet: (password: string) => PASSWORD_PATTERNS.lowercase.test(password),
+  },
+  {
+    label: "Um número",
+    isMet: (password: string) => PASSWORD_PATTERNS.number.test(password),
+  },
+  {
+    label: "Um caractere especial",
+    isMet: (password: string) =>
+      PASSWORD_PATTERNS.specialCharacter.test(password),
+  },
+] as const;
+
+function FieldIcon({ type }: { type: ServerFieldName }) {
   if (type === "email") {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -53,11 +82,13 @@ const genericErrors: Record<string, string> = {
     "Conta criada, mas a sessão não pôde ser iniciada. Acesse Entrar e tente novamente.",
 };
 
-function translateFieldError(field: FieldName, error: string): string {
+function translateFieldError(field: ServerFieldName, error: string): string {
   if (field === "name") return "Informe um nome com pelo menos 2 caracteres.";
   if (field === "email") return "Informe um e-mail válido.";
-  if (error.includes("letter")) return "Inclua pelo menos uma letra.";
+  if (error.includes("uppercase")) return "Inclua pelo menos uma letra maiúscula.";
+  if (error.includes("lowercase")) return "Inclua pelo menos uma letra minúscula.";
   if (error.includes("number")) return "Inclua pelo menos um número.";
+  if (error.includes("special")) return "Inclua pelo menos um caractere especial.";
   return "Use entre 8 e 72 caracteres.";
 }
 
@@ -85,19 +116,69 @@ export function AuthForm({ mode }: AuthFormProps) {
   const router = useRouter();
   const isRegister = mode === "register";
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<
     Partial<Record<FieldName, string>>
   >({});
 
+  const passwordIsValid = passwordRequirements.every(({ isMet }) =>
+    isMet(password),
+  );
+  const passwordsMatch =
+    confirmPassword.length > 0 && confirmPassword === password;
+  const confirmPasswordError =
+    fieldErrors.confirmPassword ||
+    (confirmPasswordTouched && !passwordsMatch
+      ? "As senhas não coincidem."
+      : undefined);
+
+  function updatePassword(value: string) {
+    setPassword(value);
+    setFieldErrors((current) => ({
+      ...current,
+      password: undefined,
+      confirmPassword: undefined,
+    }));
+  }
+
+  function updateConfirmPassword(value: string) {
+    setConfirmPassword(value);
+    setFieldErrors((current) => ({
+      ...current,
+      confirmPassword: undefined,
+    }));
+  }
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsSubmitting(true);
     setFieldErrors({});
 
     const form = new FormData(event.currentTarget);
     const email = String(form.get("email") ?? "");
-    const password = String(form.get("password") ?? "");
+
+    if (isRegister) {
+      const errors: Partial<Record<FieldName, string>> = {};
+
+      if (!passwordIsValid) {
+        errors.password = "Atenda a todos os requisitos da senha.";
+      }
+
+      if (!passwordsMatch) {
+        errors.confirmPassword = "As senhas não coincidem.";
+        setConfirmPasswordTouched(true);
+      }
+
+      if (Object.keys(errors).length > 0) {
+        setFieldErrors(errors);
+        return;
+      }
+    }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch(
@@ -225,16 +306,18 @@ export function AuthForm({ mode }: AuthFormProps) {
           <input
             name="password"
             type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(event) => updatePassword(event.target.value)}
             autoComplete={isRegister ? "new-password" : "current-password"}
-            minLength={isRegister ? 8 : 1}
+            minLength={isRegister ? PASSWORD_MIN_LENGTH : 1}
             maxLength={72}
             required
             aria-invalid={Boolean(fieldErrors.password)}
             aria-describedby={
-              fieldErrors.password
-                ? "password-error"
-                : isRegister
-                  ? "password-help"
+              isRegister
+                ? `password-requirements${fieldErrors.password ? " password-error" : ""}`
+                : fieldErrors.password
+                  ? "password-error"
                   : undefined
             }
             placeholder={isRegister ? "Crie uma senha segura" : "Sua senha"}
@@ -249,12 +332,72 @@ export function AuthForm({ mode }: AuthFormProps) {
         </span>
         {fieldErrors.password ? (
           <small id="password-error">{fieldErrors.password}</small>
-        ) : isRegister ? (
-          <small id="password-help">
-            Mínimo de 8 caracteres, com uma letra e um número.
-          </small>
+        ) : null}
+        {isRegister ? (
+          <ul className={styles.passwordRequirements} id="password-requirements">
+            {passwordRequirements.map(({ label, isMet }) => {
+              const requirementIsMet = isMet(password);
+
+              return (
+                <li
+                  className={requirementIsMet ? styles.requirementMet : undefined}
+                  key={label}
+                  aria-label={`${label}: ${requirementIsMet ? "atendido" : "pendente"}`}
+                >
+                  <span aria-hidden="true">{requirementIsMet ? "✓" : "·"}</span>
+                  {label}
+                </li>
+              );
+            })}
+          </ul>
         ) : null}
       </label>
+
+      {isRegister ? (
+        <label className={styles.field}>
+          <span>Confirmar senha</span>
+          <span className={styles.passwordControl}>
+            <span className={styles.fieldIcon}><FieldIcon type="password" /></span>
+            <input
+              name="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(event) => updateConfirmPassword(event.target.value)}
+              onBlur={() => setConfirmPasswordTouched(true)}
+              autoComplete="new-password"
+              maxLength={72}
+              required
+              aria-invalid={Boolean(confirmPasswordError)}
+              aria-describedby="confirm-password-status"
+              placeholder="Digite a senha novamente"
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword((current) => !current)}
+              aria-pressed={showConfirmPassword}
+            >
+              {showConfirmPassword ? "Ocultar" : "Mostrar"}
+            </button>
+          </span>
+          <small
+            className={
+              confirmPasswordError
+                ? styles.fieldError
+                : passwordsMatch
+                  ? styles.matchSuccess
+                  : undefined
+            }
+            id="confirm-password-status"
+            aria-live="polite"
+          >
+            {confirmPasswordError
+              ? confirmPasswordError
+              : passwordsMatch
+                ? "As senhas coincidem."
+                : "Repita a senha para confirmar."}
+          </small>
+        </label>
+      ) : null}
 
       <button
         className={styles.submit}

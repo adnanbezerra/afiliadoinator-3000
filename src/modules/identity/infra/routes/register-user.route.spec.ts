@@ -35,7 +35,7 @@ describe("registerUserRoute", () => {
         body: JSON.stringify({
           name: user.name,
           email: user.email,
-          password: "password1",
+          password: "Password1!",
         }),
       }),
     );
@@ -64,7 +64,7 @@ describe("registerUserRoute", () => {
         body: JSON.stringify({
           name: "Adnan",
           email: "adnan@example.com",
-          password: "password1",
+          password: "Password1!",
         }),
       }),
     );

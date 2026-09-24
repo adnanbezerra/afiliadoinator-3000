@@ -321,6 +321,55 @@
   color: var(--danger);
 }
 
+.passwordRequirements {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 16px;
+  margin: 0;
+  padding: 0;
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  line-height: 1.45;
+  list-style: none;
+}
+
+.passwordRequirements li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.passwordRequirements li span {
+  display: grid;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  place-items: center;
+  border: 1px solid rgba(37, 42, 45, 0.38);
+  border-radius: 50%;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.passwordRequirements .requirementMet,
+.matchSuccess {
+  color: var(--approval);
+}
+
+.passwordRequirements .requirementMet span {
+  border-color: var(--approval);
+  background: var(--approval);
+  color: #f8f4e9;
+}
+
+.field .matchSuccess {
+  color: var(--approval);
+}
+
+.field .fieldError {
+  color: var(--danger);
+}
+
 .inputControl,
 .passwordControl {
   position: relative;
@@ -737,6 +786,10 @@
   .index nav {
     width: 100%;
     justify-content: space-between;
+  }
+
+  .passwordRequirements {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import type { MarketplaceProvider } from "../shared/MarketplaceProvider";
-import { MarketplaceProviderRegistry } from "./MarketplaceProviderRegistry";
+import {
+  MarketplaceProviderNotRegisteredError,
+  MarketplaceProviderRegistry,
+} from "./MarketplaceProviderRegistry";
 
 const amazon: MarketplaceProvider = {
   id: "amazon",
@@ -21,6 +24,14 @@ describe("MarketplaceProviderRegistry", () => {
 
     expect(() => registry.register(amazon)).toThrow(
       "Marketplace provider already registered: amazon",
+    );
+  });
+
+  it("identifies a known marketplace without a registered adapter", () => {
+    const registry = new MarketplaceProviderRegistry();
+
+    expect(() => registry.get("shopee")).toThrow(
+      MarketplaceProviderNotRegisteredError,
     );
   });
 });

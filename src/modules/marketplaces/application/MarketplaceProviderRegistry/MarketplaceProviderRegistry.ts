@@ -1,6 +1,13 @@
 import type { MarketplaceProvider } from "../shared/MarketplaceProvider";
 import type { MarketplaceId } from "../shared/Product";
 
+export class MarketplaceProviderNotRegisteredError extends Error {
+  constructor(readonly provider: MarketplaceId) {
+    super(`Marketplace provider not registered: ${provider}`);
+    this.name = "MarketplaceProviderNotRegisteredError";
+  }
+}
+
 export class MarketplaceProviderRegistry {
   private readonly providers = new Map<MarketplaceId, MarketplaceProvider>();
 
@@ -16,7 +23,7 @@ export class MarketplaceProviderRegistry {
     const provider = this.providers.get(id);
 
     if (!provider) {
-      throw new Error(`Marketplace provider not registered: ${id}`);
+      throw new MarketplaceProviderNotRegisteredError(id);
     }
 
     return provider;

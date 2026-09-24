@@ -6,6 +6,7 @@ import { InvalidSessionError } from "@/src/modules/identity/application/shared/A
 import { requireAuthenticatedUser } from "@/src/modules/identity/infra/routes/require-authenticated-user";
 import { NextResponse, type NextRequest } from "next/server";
 import { ZodError } from "zod";
+import { MarketplaceProviderNotRegisteredError } from "../../application/MarketplaceProviderRegistry/MarketplaceProviderRegistry";
 import { getSearchProducts } from "../../application/SearchProducts/SearchProducts.factory";
 import { searchProductsValidator } from "../validators/search-products.validator";
 
@@ -37,6 +38,16 @@ export async function searchProductsRoute(
       return NextResponse.json(
         { error: "Authentication required" },
         { status: 401 },
+      );
+    }
+
+    if (error instanceof MarketplaceProviderNotRegisteredError) {
+      return NextResponse.json(
+        {
+          error: "Marketplace provider is not available",
+          provider: error.provider,
+        },
+        { status: 501 },
       );
     }
 

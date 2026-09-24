@@ -1,8 +1,11 @@
-export type MarketplaceId =
-  | "amazon"
-  | "aliexpress"
-  | "mercado-livre"
-  | "shopee";
+export const MARKETPLACE_IDS = [
+  "amazon",
+  "aliexpress",
+  "mercado-livre",
+  "shopee",
+] as const;
+
+export type MarketplaceId = (typeof MARKETPLACE_IDS)[number];
 
 export interface Product {
   provider: MarketplaceId;

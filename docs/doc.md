@@ -337,7 +337,9 @@ ranking interno
 
 # 3.1 Shopee Brasil
 
-A conta deste projeto passou a ter acesso à integração da Shopee.
+A integração da Shopee está prevista, mas a API ainda não está disponível para
+este projeto. Não implementar chamadas externas até receber a documentação e o
+acesso oficiais.
 
 Manter a Shopee como provider de primeira classe no modelo normalizado:
 

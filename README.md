@@ -48,9 +48,11 @@ GET /api/products/search?provider=amazon&q=notebook&page=1&pageSize=10
 
 A busca exige uma sessão válida criada pelas rotas de autenticação.
 
-`provider` aceita `amazon`, `aliexpress` ou `mercado-livre`. `categoryId` é
-opcional. Cada adapter estende `AbstractMarketplaceAdapter`, que mantém o fluxo
-comum de busca, consulta individual e normalização para `Product`.
+`provider` aceita `amazon`, `aliexpress`, `mercado-livre` ou `shopee`.
+`categoryId` é opcional. A Shopee já faz parte do contrato, mas retorna `501`
+até a API oficial e o adapter serem implementados. Cada adapter estende
+`AbstractMarketplaceAdapter`, que mantém o fluxo comum de busca, consulta
+individual e normalização para `Product`.
 
 Preencha as credenciais correspondentes no `.env` antes de usar cada provider.
 
